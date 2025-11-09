@@ -1,4 +1,3 @@
-import { Phone, Mail, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 
 interface HeaderProps {
@@ -10,7 +9,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
 
-  const services = [
+  const serviceItems = [
     { id: 'air-eau', label: 'PAC Air/Eau' },
     { id: 'air-air', label: 'PAC Air/Air' },
     { id: 'chaudiere', label: 'PAC Chaudière' },
@@ -18,29 +17,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
     { id: 'entretien', label: 'Entretien' },
   ];
 
-  const menuItems = [
-    { id: 'home', label: 'Accueil' },
-    { id: 'services', label: 'Nos services', children: services },
-    { id: 'contact', label: 'Contact' },
-  ];
-
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
-      {/* Bandeau supérieur */}
-      <div className="bg-blue-600 text-white py-2">
-        <div className="max-w-7xl mx-auto px-4 flex justify-end items-center gap-6 text-sm">
-          <a href="tel:+33123456789" className="flex items-center gap-2 hover:text-blue-100">
-            <Phone size={16} />
-            <span>01 23 45 67 89</span>
-          </a>
-          <a href="mailto:contact@mpc-chauffage.fr" className="flex items-center gap-2 hover:text-blue-100">
-            <Mail size={16} />
-            <span>contact@mpc-chauffage.fr</span>
-          </a>
-        </div>
-      </div>
-
-      {/* Barre de navigation */}
+    <header className="absolute top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-md shadow-sm">
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
@@ -66,113 +44,121 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
           </button>
 
           {/* Menu desktop */}
-          <nav className="hidden md:flex items-center gap-8">
-            {menuItems.map((item) =>
-              item.children ? (
-                <div key={item.id} className="relative">
-                  <button
-                    onClick={() => setServicesOpen(!servicesOpen)}
-                    className={`flex items-center gap-1 font-medium transition-colors ${
-                      currentPage.startsWith('air') ||
-                      currentPage === 'chaudiere' ||
-                      currentPage === 'collectif' ||
-                      currentPage === 'entretien'
-                        ? 'text-blue-600'
-                        : 'text-gray-700 hover:text-blue-600'
-                    }`}
-                  >
-                    {item.label}
-                    <ChevronDown
-                      size={16}
-                      className={`mt-0.5 transition-transform ${servicesOpen ? 'rotate-180' : ''}`}
-                    />
-                  </button>
+          <nav className="hidden md:flex items-center gap-6">
+            <button
+              onClick={() => onNavigate('home')}
+              className={`font-medium ${
+                currentPage === 'home' ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'
+              }`}
+            >
+              Accueil
+            </button>
 
-                  {servicesOpen && (
-                    <div className="absolute left-0 mt-2 w-56 bg-white border border-gray-200 rounded-md shadow-lg">
-                      {item.children.map((sub) => (
-                        <button
-                          key={sub.id}
-                          onClick={() => {
-                            onNavigate(sub.id);
-                            setServicesOpen(false);
-                          }}
-                          className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
-                        >
-                          {sub.label}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <button
-                  key={item.id}
-                  onClick={() => onNavigate(item.id)}
-                  className={`font-medium transition-colors ${
-                    currentPage === item.id
-                      ? 'text-blue-600'
-                      : 'text-gray-700 hover:text-blue-600'
-                  }`}
+            {/* Dropdown Services */}
+            <div
+              className="relative"
+              onMouseEnter={() => setServicesOpen(true)}
+              onMouseLeave={() => setServicesOpen(false)}
+            >
+              <button
+                className={`font-medium flex items-center gap-1 ${
+                  servicesOpen || serviceItems.some(s => s.id === currentPage)
+                    ? 'text-blue-600'
+                    : 'text-gray-800 hover:text-blue-600'
+                }`}
+              >
+                Nos services
+                <svg
+                  className={`w-4 h-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  {item.label}
-                </button>
-              )
-            )}
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {servicesOpen && (
+                <div className="absolute left-0 mt-2 bg-white shadow-lg rounded-md py-2 w-48">
+                  {serviceItems.map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => onNavigate(item.id)}
+                      className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <button
+              onClick={() => onNavigate('contact')}
+              className={`font-medium ${
+                currentPage === 'contact' ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'
+              }`}
+            >
+              Contact
+            </button>
           </nav>
         </div>
 
         {/* Menu mobile */}
         {menuOpen && (
-          <nav className="md:hidden mt-4 pb-4 flex flex-col gap-3 border-t pt-4">
-            {menuItems.map((item) =>
-              item.children ? (
-                <div key={item.id}>
-                  <button
-                    onClick={() => setServicesOpen(!servicesOpen)}
-                    className="flex justify-between items-center text-left py-2 font-medium text-gray-700 hover:text-blue-600 w-full"
-                  >
-                    <span>{item.label}</span>
-                    <ChevronDown
-                      size={16}
-                      className={`transition-transform ${servicesOpen ? 'rotate-180' : ''}`}
-                    />
-                  </button>
-                  {servicesOpen && (
-                    <div className="pl-4 flex flex-col gap-2 mt-2">
-                      {item.children.map((sub) => (
-                        <button
-                          key={sub.id}
-                          onClick={() => {
-                            onNavigate(sub.id);
-                            setMenuOpen(false);
-                            setServicesOpen(false);
-                          }}
-                          className="text-left text-gray-600 hover:text-blue-600"
-                        >
-                          {sub.label}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <button
-                  key={item.id}
-                  onClick={() => {
-                    onNavigate(item.id);
-                    setMenuOpen(false);
-                  }}
-                  className={`text-left py-2 font-medium transition-colors ${
-                    currentPage === item.id
-                      ? 'text-blue-600'
-                      : 'text-gray-700 hover:text-blue-600'
-                  }`}
+          <nav className="md:hidden mt-4 pb-4 flex flex-col gap-3">
+            <button
+              onClick={() => {
+                onNavigate('home');
+                setMenuOpen(false);
+              }}
+              className="text-left text-gray-700 hover:text-blue-600"
+            >
+              Accueil
+            </button>
+
+            <div>
+              <button
+                onClick={() => setServicesOpen(!servicesOpen)}
+                className="text-left w-full flex justify-between items-center text-gray-700 hover:text-blue-600"
+              >
+                Nos services
+                <svg
+                  className={`w-4 h-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  {item.label}
-                </button>
-              )
-            )}
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {servicesOpen && (
+                <div className="mt-2 flex flex-col gap-2 pl-4">
+                  {serviceItems.map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => {
+                        onNavigate(item.id);
+                        setMenuOpen(false);
+                      }}
+                      className="text-left text-gray-700 hover:text-blue-600"
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <button
+              onClick={() => {
+                onNavigate('contact');
+                setMenuOpen(false);
+              }}
+              className="text-left text-gray-700 hover:text-blue-600"
+            >
+              Contact
+            </button>
           </nav>
         )}
       </div>

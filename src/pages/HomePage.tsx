@@ -10,13 +10,13 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       id: 'air-eau',
       icon: Droplet,
       title: 'Pompe à chaleur air/eau',
-      description: 'Solution performante pour chauffer votre habitation tout en réalisant des économies d\'énergie',
+      description: "Solution performante pour chauffer votre habitation tout en réalisant des économies d'énergie",
     },
     {
       id: 'air-air',
       icon: Wind,
       title: 'Pompe à chaleur air/air',
-      description: 'Chauffage et climatisation en un seul système pour un confort optimal toute l\'année',
+      description: "Chauffage et climatisation en un seul système pour un confort optimal toute l'année",
     },
     {
       id: 'chaudiere',
@@ -68,37 +68,51 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   return (
     <div>
 
-      {/* HERO AVEC IMAGE PLEIN ÉCRAN */}
-      <section className="relative w-full h-screen">
-        <img
-          src="/pac.webp"
-          alt="Pompe à chaleur installée par MPC Chauffage"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center text-white px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Expert en pompes à chaleur et chauffage en Île-de-France
-          </h1>
-          <p className="text-xl mb-8 max-w-2xl">
-            MPC Chauffage vous accompagne dans vos projets de chauffage et climatisation.
-            Certifiés RGE, nous intervenons rapidement partout en Île-de-France.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <button
-              onClick={() => onNavigate('contact')}
-              className="bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-blue-50 transition-colors"
-            >
-              Devis gratuit
-            </button>
-            <a
-              href="tel:+33123456789"
-              className="border-2 border-white text-white px-8 py-3 rounded-md font-semibold hover:bg-white hover:text-blue-600 transition-colors"
-            >
-              01 23 45 67 89
-            </a>
-          </div>
-        </div>
-      </section>
+<section
+  className="relative min-h-screen bg-cover bg-center text-white flex items-center mt-20"
+  style={{
+    backgroundImage: "url('/pac.webp')",
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  }}
+>
+  <div className="relative z-10 w-full px-6 sm:px-8 md:px-20 lg:px-32 flex flex-col md:items-start items-center justify-center text-center md:text-left">
+    <div className="max-w-xl">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight drop-shadow-lg">
+        Réduisez vos factures jusqu’à{" "}
+        <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent font-extrabold">
+          40 %
+        </span>
+        . <br className="hidden sm:block" />
+        Avec MPC,{" "}
+        <span className="text-blue-400 italic font-semibold">osez économiser</span>.
+      </h1>
+
+      <p className="text-base sm:text-lg md:text-xl text-blue-100 mb-8 md:mb-10 drop-shadow-md">
+        Des solutions performantes et durables pour votre confort énergétique.
+      </p>
+
+      <div className="flex flex-col sm:flex-row gap-4 sm:justify-center md:justify-start">
+        <button
+          onClick={() => onNavigate('contact')}
+          className="bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-semibold text-base sm:text-lg hover:bg-blue-700 transition-colors"
+        >
+          Demander un devis gratuit
+        </button>
+
+        <a
+          href="tel:+33123456789"
+          className="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-semibold text-base sm:text-lg hover:bg-white hover:text-blue-700 transition-colors"
+        >
+          01 23 45 67 89
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
 
       {/* SERVICES */}
       <section className="py-16 bg-white">
@@ -236,7 +250,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
           <div className="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto text-center">
             {['Paris', 'Hauts-de-Seine', 'Seine-Saint-Denis', 'Val-de-Marne',
-              'Essonne', 'Yvelines', 'Val-d\'Oise', 'Seine-et-Marne'].map((dept) => (
+              'Essonne', 'Yvelines', "Val-d'Oise", 'Seine-et-Marne'].map((dept) => (
               <div key={dept} className="bg-blue-700 rounded-lg py-4 px-6">
                 <p className="font-semibold">{dept}</p>
               </div>
@@ -262,7 +276,6 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </button>
         </div>
       </section>
-
     </div>
   );
 }
