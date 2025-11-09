@@ -67,9 +67,8 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
   return (
     <div>
-
 <section
-  className="relative min-h-screen bg-cover bg-center text-white flex items-center mt-20"
+  className="relative min-h-[110vh] bg-cover bg-center text-white flex items-center -mt-16 md:-mt-20"
   style={{
     backgroundImage: "url('/pac.webp')",
     backgroundSize: 'cover',
@@ -77,7 +76,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   }}
 >
   <div className="relative z-10 w-full px-6 sm:px-8 md:px-20 lg:px-32 flex flex-col md:items-start items-center justify-center text-center md:text-left">
-    <div className="max-w-xl">
+    <div className="max-w-xl mt-12 md:mt-0">
       <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight drop-shadow-lg">
         Réduisez vos factures jusqu’à{" "}
         <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent font-extrabold">
@@ -110,6 +109,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
     </div>
   </div>
 </section>
+
 
 
 
