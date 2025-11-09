@@ -48,7 +48,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
     {
       name: 'Sophie M.',
       location: 'Paris 15e',
-      text: 'Installation rapide et professionnelle. Notre facture de chauffage a diminué de 40%. Je recommande vivement MPC !',
+      text: "Installation rapide et professionnelle. Notre facture de chauffage a diminué de 40%. Je recommande vivement MPC !",
       rating: 5,
     },
     {
@@ -67,91 +67,35 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
   return (
     <div>
-<section
-  className="relative min-h-[110vh] bg-cover bg-center text-white flex items-center -mt-16 md:-mt-20"
-  style={{
-    backgroundImage: "url('/pac.webp')",
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  }}
->
-  <div className="relative z-10 w-full px-6 sm:px-8 md:px-20 lg:px-32 flex flex-col md:items-start items-center justify-center text-center md:text-left">
-    <div className="max-w-xl mt-12 md:mt-0">
-      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight drop-shadow-lg">
-        Réduisez vos factures jusqu’à{" "}
-        <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent font-extrabold">
-          40 %
-        </span>
-        . <br className="hidden sm:block" />
-        Avec MPC,{" "}
-        <span className="text-blue-400 italic font-semibold">osez économiser</span>.
-      </h1>
 
-      <p className="text-base sm:text-lg md:text-xl text-blue-100 mb-8 md:mb-10 drop-shadow-md">
-        Des solutions performantes et durables pour votre confort énergétique.
-      </p>
+      {/* HERO */}
+      <section className="relative w-full h-[85vh] md:h-[90vh]">
+        <img
+          src="/pac.webp"
+          alt="Pompe à chaleur installée par MPC Chauffage"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 flex flex-col justify-center items-start text-left text-white px-6 md:px-20">
+          <h1 className="text-3xl md:text-5xl mb-4 font-medium max-w-2xl leading-tight">
+            Réduisez vos factures jusqu'à 40% <br /> avec MPC Chauffage
+          </h1>
+          <p className="text-lg md:text-xl text-blue-50 max-w-lg mb-8">
+            Experts en pompes à chaleur, nous vous accompagnons dans tous vos projets de chauffage et climatisation.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <button
+              onClick={() => onNavigate('air-eau')}
+              className="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium text-base sm:text-lg hover:bg-blue-700 hover:text-white border-2 border-white transition-all"
+            >
+              Découvrir nos solutions
+            </button>
 
-      <div className="flex flex-col sm:flex-row gap-4 sm:justify-center md:justify-start">
-        <button
-          onClick={() => onNavigate('contact')}
-          className="bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-semibold text-base sm:text-lg hover:bg-blue-700 transition-colors"
-        >
-          Demander un devis gratuit
-        </button>
-
-        <a
-          href="tel:+33123456789"
-          className="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-semibold text-base sm:text-lg hover:bg-white hover:text-blue-700 transition-colors"
-        >
-          01 23 45 67 89
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-
-
-      {/* SERVICES */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Nos services
-            </h2>
-            <p className="text-xl text-gray-600">
-              Des solutions complètes pour tous vos besoins en chauffage
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => {
-              const Icon = service.icon;
-              return (
-                <div
-                  key={service.id}
-                  className="bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-blue-500 hover:shadow-lg transition-all cursor-pointer"
-                  onClick={() => onNavigate(service.id)}
-                >
-                  <Icon className="text-blue-600 mb-4" size={48} />
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4">{service.description}</p>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onNavigate(service.id);
-                    }}
-                    className="text-blue-600 font-semibold hover:text-blue-700"
-                  >
-                    En savoir plus →
-                  </button>
-                </div>
-              );
-            })}
+            <button
+              onClick={() => onNavigate('contact')}
+              className="bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium text-base sm:text-lg hover:bg-white hover:text-blue-700 border-2 border-blue-700 transition-all"
+            >
+              Économiser maintenant
+            </button>
           </div>
         </div>
       </section>
@@ -205,59 +149,191 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
-      {/* TÉMOIGNAGES */}
+      {/* NOS SERVICES */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Témoignages clients
+              Nos services
             </h2>
             <p className="text-xl text-gray-600">
-              Ce que nos clients disent de nous
+              Des solutions complètes pour tous vos besoins en chauffage
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-gray-50 rounded-lg p-6">
-                <div className="flex gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="text-yellow-500 fill-current" size={20} />
-                  ))}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service) => {
+              const Icon = service.icon;
+              return (
+                <div
+                  key={service.id}
+                  className="bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-blue-500 hover:shadow-lg transition-all cursor-pointer"
+                  onClick={() => onNavigate(service.id)}
+                >
+                  <Icon className="text-blue-600 mb-4" size={48} />
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-600 mb-4">{service.description}</p>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onNavigate(service.id);
+                    }}
+                    className="text-blue-600 font-semibold hover:text-blue-700"
+                  >
+                    En savoir plus →
+                  </button>
                 </div>
-                <p className="text-gray-700 mb-4 italic">"{testimonial.text}"</p>
-                <div>
-                  <p className="font-semibold text-gray-900">{testimonial.name}</p>
-                  <p className="text-sm text-gray-600">{testimonial.location}</p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* ZONE D’INTERVENTION */}
-      <section className="py-16 bg-blue-600 text-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Zone d'intervention
-            </h2>
-            <p className="text-xl text-blue-100">
-              Nous intervenons dans toute l'Île-de-France
-            </p>
-          </div>
+   {/* AVIS GOOGLE */}
+<section id="avis" className="py-16 bg-gray-50 overflow-hidden">
+  <div className="max-w-6xl mx-auto px-4 text-center">
+    <img
+      src="/Google-logo.svg"
+      alt="Avis Google"
+      className="w-20 h-20 object-contain mx-auto mb-4"
+    />
+    <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-6">
+      Ils parlent de nous
+    </h2>
+    <p className="text-lg text-gray-700 mb-10">
+      <span className="font-bold text-blue-600">★★★★★</span> 4.9/5 sur Google
+    </p>
 
-          <div className="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto text-center">
-            {['Paris', 'Hauts-de-Seine', 'Seine-Saint-Denis', 'Val-de-Marne',
-              'Essonne', 'Yvelines', "Val-d'Oise", 'Seine-et-Marne'].map((dept) => (
-              <div key={dept} className="bg-blue-700 rounded-lg py-4 px-6">
-                <p className="font-semibold">{dept}</p>
-              </div>
-            ))}
+    {/* Carrousel d'avis */}
+    <div className="relative">
+      <div
+        className="flex gap-6 animate-scroll"
+        style={{
+          animation: 'scroll 40s linear infinite',
+        }}
+      >
+        {[
+          {
+            name: 'Sophie M.',
+            location: 'Paris 15e',
+            text: "Travail impeccable et équipe très professionnelle. Ma pompe à chaleur fonctionne à merveille !",
+            rating: 5,
+          },
+          {
+            name: 'Laurent D.',
+            location: 'Versailles',
+            text: "Installation rapide, équipe au top. J’ai fait 35% d’économie dès la première année.",
+            rating: 5,
+          },
+          {
+            name: 'Marie C.',
+            location: 'Boulogne-Billancourt',
+            text: "Service client réactif et techniciens très compétents. Je recommande sans hésiter.",
+            rating: 5,
+          },
+          {
+            name: 'Julie R.',
+            location: 'Nanterre',
+            text: "Devis clair, travaux rapides et résultat parfait. Très satisfaite de MPC Chauffage.",
+            rating: 5,
+          },
+          {
+            name: 'Antoine L.',
+            location: 'Saint-Denis',
+            text: "Excellente expérience. Installation propre et équipe très respectueuse.",
+            rating: 5,
+          },
+          {
+            name: 'Caroline T.',
+            location: 'Levallois',
+            text: "Service après-vente super réactif, je me sens en confiance avec MPC.",
+            rating: 5,
+          },
+          {
+            name: 'Nicolas P.',
+            location: 'Fontenay-aux-Roses',
+            text: "Un vrai gain d’énergie et un confort incroyable depuis l’installation !",
+            rating: 5,
+          },
+          {
+            name: 'Emma D.',
+            location: 'Créteil',
+            text: "Professionnalisme, ponctualité et efficacité. Une entreprise que je recommande vivement.",
+            rating: 5,
+          },
+        ].map((review, index) => (
+          <div
+            key={index}
+            className="min-w-[300px] md:min-w-[360px] bg-white rounded-lg p-6 shadow-md border border-gray-100"
+          >
+            <div className="flex gap-1 mb-3 justify-center">
+              {[...Array(review.rating)].map((_, i) => (
+                <svg
+                  key={i}
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  className="w-5 h-5 text-blue-600"
+                >
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.12 3.436a1 1 0 00.95.69h3.616c.969 0 1.371 1.24.588 1.81l-2.925 2.13a1 1 0 00-.364 1.118l1.12 3.437c.3.92-.755 1.688-1.54 1.118L10 13.347l-2.936 2.129c-.784.57-1.838-.198-1.539-1.118l1.12-3.437a1 1 0 00-.364-1.118L3.356 8.863c-.783-.57-.38-1.81.588-1.81h3.616a1 1 0 00.95-.69l1.12-3.436z" />
+                </svg>
+              ))}
+            </div>
+            <p className="text-gray-700 mb-3 italic text-sm md:text-base">"{review.text}"</p>
+            <p className="font-semibold text-gray-900">{review.name}</p>
+            <p className="text-sm text-gray-500">{review.location}</p>
           </div>
-        </div>
-      </section>
+        ))}
+
+        {/* Duplicate for infinite loop */}
+        {[
+          ...Array(8).fill({
+            name: 'Avis client',
+            location: 'IDF',
+            text: "Entreprise sérieuse et efficace. Très bonne expérience avec MPC.",
+            rating: 5,
+          }),
+        ].map((review, index) => (
+          <div
+            key={`duplicate-${index}`}
+            className="min-w-[300px] md:min-w-[360px] bg-white rounded-lg p-6 shadow-md border border-gray-100 opacity-80"
+          >
+            <div className="flex gap-1 mb-3 justify-center">
+              {[...Array(review.rating)].map((_, i) => (
+                <svg
+                  key={i}
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  className="w-5 h-5 text-blue-600"
+                >
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.12 3.436a1 1 0 00.95.69h3.616c.969 0 1.371 1.24.588 1.81l-2.925 2.13a1 1 0 00-.364 1.118l1.12 3.437c.3.92-.755 1.688-1.54 1.118L10 13.347l-2.936 2.129c-.784.57-1.838-.198-1.539-1.118l1.12-3.437a1 1 0 00-.364-1.118L3.356 8.863c-.783-.57-.38-1.81.588-1.81h3.616a1 1 0 00.95-.69l1.12-3.436z" />
+                </svg>
+              ))}
+            </div>
+            <p className="text-gray-700 mb-3 italic text-sm md:text-base">"{review.text}"</p>
+            <p className="font-semibold text-gray-900">{review.name}</p>
+            <p className="text-sm text-gray-500">{review.location}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  {/* Animation CSS */}
+  <style>{`
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-scroll:hover {
+      animation-play-state: paused;
+    }
+  `}</style>
+</section>
+
 
       {/* CTA FINAL */}
       <section className="py-16 bg-gray-900 text-white">
@@ -276,6 +352,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </button>
         </div>
       </section>
+
     </div>
   );
 }
