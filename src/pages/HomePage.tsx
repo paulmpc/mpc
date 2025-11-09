@@ -1,5 +1,4 @@
 import { Droplet, Wind, Flame, Building2, Wrench, CheckCircle, Star } from 'lucide-react';
-import ContactForm from '../components/ContactForm';
 
 interface HomePageProps {
   onNavigate: (page: string) => void;
@@ -68,39 +67,40 @@ export default function HomePage({ onNavigate }: HomePageProps) {
 
   return (
     <div>
-      <section className="bg-gradient-to-br from-blue-600 to-blue-800 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                Expert en pompes à chaleur et chauffage en Île-de-France
-              </h1>
-              <p className="text-xl mb-8 text-blue-100">
-                MPC Chauffage vous accompagne dans vos projets de chauffage et climatisation.
-                Certifiés RGE, nous intervenons rapidement partout en Île-de-France.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <button
-                  onClick={() => onNavigate('contact')}
-                  className="bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-blue-50 transition-colors"
-                >
-                  Devis gratuit
-                </button>
-                <a
-                  href="tel:+33123456789"
-                  className="border-2 border-white text-white px-8 py-3 rounded-md font-semibold hover:bg-white hover:text-blue-600 transition-colors"
-                >
-                  01 23 45 67 89
-                </a>
-              </div>
-            </div>
-            <div className="hidden md:block">
-              <ContactForm compact />
-            </div>
+
+      {/* HERO AVEC IMAGE PLEIN ÉCRAN */}
+      <section className="relative w-full h-screen">
+        <img
+          src="/pac.webp"
+          alt="Pompe à chaleur installée par MPC Chauffage"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center text-white px-4">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            Expert en pompes à chaleur et chauffage en Île-de-France
+          </h1>
+          <p className="text-xl mb-8 max-w-2xl">
+            MPC Chauffage vous accompagne dans vos projets de chauffage et climatisation.
+            Certifiés RGE, nous intervenons rapidement partout en Île-de-France.
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <button
+              onClick={() => onNavigate('contact')}
+              className="bg-white text-blue-600 px-8 py-3 rounded-md font-semibold hover:bg-blue-50 transition-colors"
+            >
+              Devis gratuit
+            </button>
+            <a
+              href="tel:+33123456789"
+              className="border-2 border-white text-white px-8 py-3 rounded-md font-semibold hover:bg-white hover:text-blue-600 transition-colors"
+            >
+              01 23 45 67 89
+            </a>
           </div>
         </div>
       </section>
 
+      {/* SERVICES */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
@@ -142,6 +142,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
+      {/* ILS NOUS FONT CONFIANCE */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
@@ -190,6 +191,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
+      {/* TÉMOIGNAGES */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
@@ -220,6 +222,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
+      {/* ZONE D’INTERVENTION */}
       <section className="py-16 bg-blue-600 text-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-8">
@@ -242,6 +245,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         </div>
       </section>
 
+      {/* CTA FINAL */}
       <section className="py-16 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
@@ -258,6 +262,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </button>
         </div>
       </section>
+
     </div>
   );
 }
