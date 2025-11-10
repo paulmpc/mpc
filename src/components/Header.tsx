@@ -13,7 +13,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // ✅ Ferme uniquement si on clique *en dehors du menu*
+  // ✅ Ferme le menu si clic en dehors
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
@@ -66,13 +66,14 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
       {/* Navbar principale */}
       <div className="bg-white/90 backdrop-blur-md">
-        <div
-          ref={menuRef}
-          className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center"
-        >
+        <div ref={menuRef} className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           {/* Logo */}
           <button
-            onClick={() => onNavigate('home')}
+            onClick={() => {
+              onNavigate('home');
+              setMenuOpen(false);
+              setServicesOpen(false);
+            }}
             className="text-2xl font-bold text-blue-600 hover:text-blue-700"
           >
             MPC Chauffage
@@ -102,6 +103,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                       onClick={() => {
                         onNavigate(item.id);
                         setServicesOpen(false);
+                        setMenuOpen(false);
                       }}
                       className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
                     >
@@ -113,7 +115,11 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             </div>
 
             <button
-              onClick={() => onNavigate('home')}
+              onClick={() => {
+                onNavigate('home');
+                setMenuOpen(false);
+                setServicesOpen(false);
+              }}
               className={`font-medium ${
                 currentPage === 'home' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
               }`}
@@ -122,7 +128,11 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             </button>
 
             <button
-              onClick={() => onNavigate('contact')}
+              onClick={() => {
+                onNavigate('contact');
+                setMenuOpen(false);
+                setServicesOpen(false);
+              }}
               className={`font-medium ${
                 currentPage === 'contact' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
               }`}
@@ -130,15 +140,20 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               Contact
             </button>
 
+            {/* CTA Desktop */}
             <button
-              onClick={() => onNavigate('contact')}
+              onClick={() => {
+                onNavigate('contact');
+                setMenuOpen(false);
+                setServicesOpen(false);
+              }}
               className="ml-4 bg-blue-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-white hover:text-blue-600 border-2 border-blue-600 transition-colors"
             >
               Obtenir un devis
             </button>
           </nav>
 
-          {/* Bouton menu mobile */}
+          {/* Menu Mobile */}
           <button
             className="md:hidden text-blue-600"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -158,11 +173,15 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
           </button>
         </div>
 
-        {/* Menu mobile */}
+        {/* Menu mobile déroulant */}
         {menuOpen && (
           <nav className="md:hidden mt-4 pb-4 flex flex-col gap-3 px-4" ref={dropdownRef}>
             <button
-              onClick={() => onNavigate('home')}
+              onClick={() => {
+                onNavigate('home');
+                setMenuOpen(false); // ✅ ferme le menu après navigation
+                setServicesOpen(false);
+              }}
               className={`text-left py-2 font-medium ${
                 currentPage === 'home'
                   ? 'text-blue-600'
@@ -180,12 +199,17 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 Nos services
                 <ChevronDown size={16} />
               </button>
+
               {servicesOpen && (
                 <div className="flex flex-col pl-4">
                   {servicesList.map((item) => (
                     <button
                       key={item.id}
-                      onClick={() => onNavigate(item.id)}
+                      onClick={() => {
+                        onNavigate(item.id);
+                        setMenuOpen(false); // ✅ ferme après navigation mobile
+                        setServicesOpen(false);
+                      }}
                       className="text-left py-2 text-gray-700 hover:text-blue-600"
                     >
                       {item.label}
@@ -196,7 +220,11 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             </div>
 
             <button
-              onClick={() => onNavigate('contact')}
+              onClick={() => {
+                onNavigate('contact');
+                setMenuOpen(false); // ✅ ferme le menu
+                setServicesOpen(false);
+              }}
               className={`text-left py-2 font-medium ${
                 currentPage === 'contact'
                   ? 'text-blue-600'
@@ -207,7 +235,11 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             </button>
 
             <button
-              onClick={() => onNavigate('contact')}
+              onClick={() => {
+                onNavigate('contact');
+                setMenuOpen(false); // ✅ ferme le menu
+                setServicesOpen(false);
+              }}
               className="mt-2 bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-white hover:text-blue-600 border-2 border-blue-600 transition-colors"
             >
               Obtenir un devis
