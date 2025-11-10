@@ -25,36 +25,44 @@ export default function HomePage({ onNavigate, scrollToSection }: HomePageProps)
 
   return (
     <div className="bg-white overflow-hidden">
-      {/* HERO */}
-      <section className="relative w-full h-[85vh] md:h-[90vh] overflow-hidden">
-        <img
-          src="/pac.webp"
-          alt="Pompe à chaleur installée par MPC Chauffage"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 flex flex-col justify-center items-start text-left text-white px-6 md:px-20">
-          <h1 className="text-3xl md:text-5xl mb-4 font-medium max-w-2xl leading-tight">
-          Une solution adapté à vos besoins   <br /> pour un confort tout au long de  l'année.
-          </h1>
-          <p className="text-lg md:text-xl text-blue-50 max-w-lg mb-8">
-            Experts en pompes à chaleur, nous vous accompagnons dans tous vos projets de chauffage et climatisation.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <button
-              onClick={() => onNavigate("air-eau")}
-              className="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium text-base sm:text-lg hover:bg-blue-700 hover:text-white border-2 border-white transition-all"
-            >
-              Découvrir nos solutions
-            </button>
-            <button
-              onClick={() => onNavigate("contact")}
-              className="bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium text-base sm:text-lg hover:bg-white hover:text-blue-700 border-2 border-blue-700 transition-all"
-            >
-              Économiser maintenant
-            </button>
-          </div>
-        </div>
-      </section>
+{/* HERO */}
+<section className="relative w-full h-[85vh] md:h-[90vh] overflow-hidden">
+  {/* Image avec cadrage mobile */}
+  <img
+    src="/pac.webp"
+    alt="Pompe à chaleur installée par MPC Chauffage"
+    className="absolute inset-0 w-full h-full object-cover object-[84%_center] md:object-center"
+  />
+
+  {/* Overlay dégradé (plus prononcé sur mobile) */}
+  <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-transparent md:from-black/25 md:via-black/10 md:to-transparent"></div>
+
+  {/* Contenu texte */}
+  <div className="absolute inset-0 flex flex-col justify-center items-start text-left text-white px-6 md:px-20">
+    <h1 className="text-3xl md:text-5xl mb-4 font-medium max-w-2xl leading-tight">
+      Une solution adaptée à vos besoins <br /> pour un confort tout au long de l'année.
+    </h1>
+    <p className="text-lg md:text-xl text-blue-50 max-w-lg mb-8">
+      Experts en pompes à chaleur, nous vous accompagnons dans tous vos projets de chauffage et climatisation.
+    </p>
+
+    <div className="flex flex-wrap gap-4">
+      <button
+        onClick={() => onNavigate("air-eau")}
+        className="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium text-base sm:text-lg hover:bg-blue-700 hover:text-white border-2 border-white transition-all"
+      >
+        Découvrir nos solutions
+      </button>
+      <button
+        onClick={() => onNavigate("contact")}
+        className="bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium text-base sm:text-lg hover:bg-white hover:text-blue-700 border-2 border-blue-700 transition-all"
+      >
+        Économiser maintenant
+      </button>
+    </div>
+  </div>
+</section>
+
 
       {/* ✅ ILS NOUS FONT CONFIANCE */}
       <section className="pt-36 pb-28 bg-white">
