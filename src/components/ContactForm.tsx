@@ -15,42 +15,44 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError(false);
+    setSuccess(false);
 
-    const mailto = `mailto:contact@mpc-chauffage.fr?subject=${encodeURIComponent(
-      `Demande de contact - ${formData.objet}`
-    )}&body=${encodeURIComponent(
-      `
-Nom : ${formData.nom}
-Prénom : ${formData.prenom}
-Téléphone : ${formData.telephone}
-Ville : ${formData.ville}
-Code postal : ${formData.codePostal}
-Objet : ${formData.objet}
+    try {
+      const response = await fetch("https://formspree.io/f/xovyqqqa", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-Merci de me contacter pour discuter de mon projet.
-`
-    )}`;
-
-    window.location.href = mailto;
-    setSuccess(true);
-    setFormData({
-      nom: "",
-      prenom: "",
-      telephone: "",
-      ville: "",
-      codePostal: "",
-      objet: "Pompe à chaleur air/eau",
-    });
-    setLoading(false);
+      if (response.ok) {
+        setSuccess(true);
+        setFormData({
+          nom: "",
+          prenom: "",
+          telephone: "",
+          ville: "",
+          codePostal: "",
+          objet: "Pompe à chaleur air/eau",
+        });
+      } else {
+        throw new Error("Erreur serveur");
+      }
+    } catch (err) {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className={`bg-white rounded-2xl shadow-lg ${compact ? "p-6" : "p-10"}`}>
-      {/* ✅ Nouveau titre modernisé */}
+      {/* ✅ Titre modernisé */}
       <div className="text-center mb-8">
         <p className="text-blue-500 uppercase text-sm tracking-wide mb-2">
           Contactez-nous
@@ -60,9 +62,15 @@ Merci de me contacter pour discuter de mon projet.
         </h3>
       </div>
 
+      {/* ✅ Messages de feedback */}
       {success && (
-        <div className="mb-6 p-4 bg-blue-50 text-blue-800 rounded-md text-center">
-          ✅ Votre email a été préparé — envoyez-le depuis votre messagerie !
+        <div className="mb-6 p-4 bg-green-50 text-green-700 rounded-md text-center">
+          ✅ Votre message a bien été envoyé, merci ! Nous vous répondrons rapidement.
+        </div>
+      )}
+      {error && (
+        <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-md text-center">
+          ❌ Une erreur est survenue. Veuillez réessayer plus tard.
         </div>
       )}
 
@@ -76,6 +84,7 @@ Merci de me contacter pour discuter de mon projet.
               value={formData.nom}
               onChange={(e) => setFormData({ ...formData, nom: e.target.value })}
               className="w-full px-4 py-2 border rounded-md"
+              name="nom"
             />
           </div>
           <div>
@@ -86,6 +95,7 @@ Merci de me contacter pour discuter de mon projet.
               value={formData.prenom}
               onChange={(e) => setFormData({ ...formData, prenom: e.target.value })}
               className="w-full px-4 py-2 border rounded-md"
+              name="prenom"
             />
           </div>
         </div>
@@ -98,6 +108,7 @@ Merci de me contacter pour discuter de mon projet.
             value={formData.telephone}
             onChange={(e) => setFormData({ ...formData, telephone: e.target.value })}
             className="w-full px-4 py-2 border rounded-md"
+            name="telephone"
           />
         </div>
 
@@ -110,6 +121,7 @@ Merci de me contacter pour discuter de mon projet.
               value={formData.ville}
               onChange={(e) => setFormData({ ...formData, ville: e.target.value })}
               className="w-full px-4 py-2 border rounded-md"
+              name="ville"
             />
           </div>
           <div>
@@ -123,6 +135,7 @@ Merci de me contacter pour discuter de mon projet.
                 setFormData({ ...formData, codePostal: e.target.value })
               }
               className="w-full px-4 py-2 border rounded-md"
+              name="codePostal"
             />
           </div>
         </div>
@@ -135,6 +148,7 @@ Merci de me contacter pour discuter de mon projet.
               setFormData({ ...formData, objet: e.target.value })
             }
             className="w-full px-4 py-2 border rounded-md"
+            name="objet"
           >
             <option>Pompe à chaleur air/eau</option>
             <option>Pompe à chaleur air/air</option>
@@ -146,13 +160,13 @@ Merci de me contacter pour discuter de mon projet.
           </select>
         </div>
 
-        {/* ✅ Nouveau CTA */}
+        {/* ✅ Bouton CTA */}
         <button
           type="submit"
           disabled={loading}
           className="w-full bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-blue-700 disabled:opacity-50 transition-all"
         >
-          {loading ? "Envoi..." : "Lançons votre projet "}
+          {loading ? "Envoi..." : "Lançons votre projet"}
         </button>
       </form>
     </div>
