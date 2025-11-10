@@ -50,6 +50,46 @@ export const servicesData: Record<string, ServiceData> = {
     image: '/air.webp',
   },
 
+  'chaudiere': {
+    id: 'chaudiere',
+    title: 'Chaudière à condensation – performance et économies d’énergie',
+    description:
+      "Optez pour une chaudière à condensation moderne et réduisez votre consommation énergétique jusqu’à 40%.",
+    benefits: [
+      "Économies d’énergie jusqu’à 40%",
+      "Chauffage homogène et performant",
+      "Compatible avec les radiateurs existants",
+      "Entretien simplifié et durable",
+    ],
+    content: [
+      "Les chaudières à condensation récupèrent la chaleur contenue dans les fumées de combustion pour préchauffer l’eau de chauffage, ce qui permet d’atteindre un rendement supérieur à 100% sur le PCI.",
+      "Cette technologie permet une réduction importante de la consommation d’énergie et des émissions de CO₂.",
+      "MPC Chauffage propose des chaudières à condensation adaptées à votre logement, avec un accompagnement complet de la pose à la maintenance.",
+      "Nos installateurs certifiés vous garantissent une installation conforme, performante et éligible aux aides de l’État.",
+    ],
+    image: '/chaudiere.webp',
+  },
+
+  'ventilation': {
+    id: 'ventilation',
+    title: 'Systèmes de ventilation et traitement de l’air',
+    description:
+      "Assurez une qualité d’air optimale dans votre logement ou vos locaux grâce à nos solutions de ventilation performantes.",
+    benefits: [
+      "Améliore la qualité de l’air intérieur",
+      "Élimine l’humidité et les polluants",
+      "Réduit les risques de moisissures",
+      "Systèmes silencieux et économiques",
+    ],
+    content: [
+      "Une bonne ventilation est essentielle pour maintenir un air sain, éviter la condensation et préserver la santé des occupants.",
+      "MPC installe des systèmes de VMC simple et double flux ainsi que des centrales de traitement d’air pour les bâtiments collectifs ou tertiaires.",
+      "Nos experts réalisent une étude complète pour garantir le bon dimensionnement de votre installation et un renouvellement d’air optimal.",
+      "Avec MPC, bénéficiez d’un confort intérieur durable et d’une réduction des coûts de chauffage grâce à une meilleure circulation de l’air.",
+    ],
+    image: '/ventilation.webp',
+  },
+
   'collectif': {
     id: 'collectif',
     title: 'Chauffage collectif pour immeubles et bâtiments professionnels',
@@ -90,45 +130,4 @@ export const servicesData: Record<string, ServiceData> = {
     ],
     image: '/entretien.webp',
   },
-  'chaudiere': {
-    id: 'chaudiere',
-    title: 'Installation de chaudière à condensation',
-    description:
-      "Profitez d’un rendement énergétique exceptionnel grâce à la chaudière à condensation, qui récupère la chaleur contenue dans les fumées pour chauffer votre logement tout en réduisant vos factures.",
-    benefits: [
-      "Jusqu’à 40% d’économies d’énergie",
-      "Rendement supérieur à 100%",
-      "Solution fiable et durable",
-      "Compatible avec de nombreux systèmes existants",
-    ],
-    content: [
-      "La chaudière à condensation utilise une technologie innovante qui récupère la chaleur latente contenue dans la vapeur d’eau des fumées de combustion. Cela permet de consommer moins de gaz pour un même confort thermique.",
-      "Ce système offre un rendement énergétique supérieur à 100% sur PCI, ce qui se traduit par une réduction significative des factures énergétiques — jusqu’à 40% par rapport à une chaudière classique.",
-      "MPC Chauffage prend en charge l’installation complète, le remplacement et la maintenance de votre chaudière à condensation en respectant toutes les normes de sécurité et de performance.",
-      "Nos experts vous conseillent sur le modèle le plus adapté à votre habitation et à vos besoins en chauffage et en eau chaude sanitaire.",
-    ],
-    image: '/chaudiere.webp', // 🔹 ajoute ton image dans /public
-  },
-
-  'ventilation': {
-    id: 'ventilation',
-    title: 'Installation de systèmes de ventilation et traitement d’air',
-    description:
-      "Garantissez la qualité de l’air intérieur avec nos solutions de VMC et centrales de traitement d’air performantes, adaptées à chaque type de bâtiment.",
-    benefits: [
-      "Air intérieur plus sain",
-      "Réduction de l’humidité et des moisissures",
-      "Économies d’énergie grâce à la récupération de chaleur",
-      "Confort et hygiène durables",
-    ],
-    content: [
-      "Un bon système de ventilation est essentiel pour renouveler l’air intérieur, éliminer l’humidité et les polluants, et préserver la santé des occupants.",
-      "MPC installe des systèmes de VMC simple ou double flux ainsi que des centrales de traitement d’air (CTA) pour les logements, commerces et bâtiments tertiaires.",
-      "La VMC double flux permet de récupérer jusqu’à 90% de la chaleur de l’air extrait, ce qui réduit la consommation énergétique du chauffage.",
-      "Une bonne qualité d’air intérieur améliore le confort, la durabilité du bâtiment et la performance énergétique globale.",
-      "Nos équipes assurent également la maintenance et le nettoyage des réseaux pour garantir un fonctionnement optimal toute l’année.",
-    ],
-    image: '/ventilation.webp', // 🔹 ajoute ton image dans /public
-  },
-
 };

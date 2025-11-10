@@ -1,8 +1,9 @@
 import { useEffect } from "react";
-import { Droplet, Wind, Flame, Wrench, CheckCircle, Hammer, Smile } from "lucide-react";
+import { CheckCircle, Hammer, Smile } from "lucide-react";
 import { motion } from "framer-motion";
 import { StatsCard } from "../components/ui/activity-stats-card";
 import { TestimonialsColumn } from "../components/blocks/testimonials-columns-1";
+import { servicesData } from "../data/services";
 
 interface HomePageProps {
   onNavigate: (page: string, section?: string) => void;
@@ -22,47 +23,39 @@ export default function HomePage({ onNavigate, scrollToSection }: HomePageProps)
     }
   }, [scrollToSection]);
 
-
   return (
     <div className="bg-white overflow-hidden">
-{/* HERO */}
-<section className="relative w-full h-[85vh] md:h-[90vh] overflow-hidden">
-  {/* Image avec cadrage mobile */}
-  <img
-    src="/pac.webp"
-    alt="Pompe à chaleur installée par MPC Chauffage"
-    className="absolute inset-0 w-full h-full object-cover object-[84%_center] md:object-center"
-  />
-
-  {/* Overlay dégradé (plus prononcé sur mobile) */}
-  <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-transparent md:from-black/25 md:via-black/10 md:to-transparent"></div>
-
-  {/* Contenu texte */}
-  <div className="absolute inset-0 flex flex-col justify-center items-start text-left text-white px-6 md:px-20">
-    <h1 className="text-3xl md:text-5xl mb-4 font-medium max-w-2xl leading-tight">
-      Une solution adaptée à vos besoins <br /> pour un confort tout au long de l'année.
-    </h1>
-    <p className="text-lg md:text-xl text-blue-50 max-w-lg mb-8">
-      Experts en pompes à chaleur, nous vous accompagnons dans tous vos projets de chauffage et climatisation.
-    </p>
-
-    <div className="flex flex-wrap gap-4">
-      <button
-        onClick={() => onNavigate("air-eau")}
-        className="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium text-base sm:text-lg hover:bg-blue-700 hover:text-white border-2 border-white transition-all"
-      >
-        Découvrir nos solutions
-      </button>
-      <button
-        onClick={() => onNavigate("contact")}
-        className="bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium text-base sm:text-lg hover:bg-white hover:text-blue-700 border-2 border-blue-700 transition-all"
-      >
-        Économiser maintenant
-      </button>
-    </div>
-  </div>
-</section>
-
+      {/* ✅ HERO */}
+      <section className="relative w-full h-[85vh] md:h-[90vh] overflow-hidden">
+        <img
+          src="/pac.webp"
+          alt="Pompe à chaleur installée par MPC Chauffage"
+          className="absolute inset-0 w-full h-full object-cover object-[84%_center] md:object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-transparent md:from-black/25 md:via-black/10 md:to-transparent"></div>
+        <div className="absolute inset-0 flex flex-col justify-center items-start text-left text-white px-6 md:px-20">
+          <h1 className="text-3xl md:text-5xl mb-4 font-medium max-w-2xl leading-tight">
+            Une solution adaptée à vos besoins <br /> pour un confort tout au long de l'année.
+          </h1>
+          <p className="text-lg md:text-xl text-blue-50 max-w-lg mb-8">
+            Experts en pompes à chaleur, nous vous accompagnons dans tous vos projets de chauffage et climatisation.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <button
+              onClick={() => onNavigate("air-eau")}
+              className="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium text-base sm:text-lg hover:bg-blue-700 hover:text-white border-2 border-white transition-all"
+            >
+              Découvrir nos solutions
+            </button>
+            <button
+              onClick={() => onNavigate("contact")}
+              className="bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium text-base sm:text-lg hover:bg-white hover:text-blue-700 border-2 border-blue-700 transition-all"
+            >
+              Économiser maintenant
+            </button>
+          </div>
+        </div>
+      </section>
 
       {/* ✅ ILS NOUS FONT CONFIANCE */}
       <section className="pt-36 pb-28 bg-white">
@@ -71,6 +64,7 @@ export default function HomePage({ onNavigate, scrollToSection }: HomePageProps)
             Ils nous font confiance
           </h2>
 
+          {/* Logos */}
           <div className="relative w-full overflow-hidden mb-36">
             <div
               className="flex items-center justify-center gap-14 animate-scroll-infinite"
@@ -101,58 +95,71 @@ export default function HomePage({ onNavigate, scrollToSection }: HomePageProps)
             </div>
           </div>
 
+          {/* Statistiques */}
           <div className="flex flex-col md:flex-row justify-center gap-20">
-            {/* + INSTALLATIONS */}
-            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }}>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
               <StatsCard
                 icon={
                   <div className="group flex items-center justify-center w-12 h-12 rounded-full border-2 border-blue-600 bg-white transition-all duration-300 hover:bg-blue-600">
-                    <CheckCircle className="w-6 h-6 transition-all duration-300 group-hover:stroke-white" stroke="#2563eb" fill="none" strokeWidth={2.2} />
+                    <CheckCircle className="w-6 h-6 group-hover:stroke-white" stroke="#2563eb" />
                   </div>
                 }
                 title="+ Installations"
                 metric={200}
                 subtext="Réalisées partout en Île-de-France"
-                className="mx-auto bg-white border border-blue-600 text-blue-700 shadow-sm hover:shadow-lg hover:shadow-blue-100 transition-all [&_h2]:text-blue-600 [&_span]:text-blue-600"
+                className="bg-white border border-blue-600 text-blue-700 shadow-sm hover:shadow-lg hover:shadow-blue-100 transition-all"
               />
             </motion.div>
 
-            {/* GARANTIE DÉCENNALE */}
-            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15 }} viewport={{ once: true }}>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.15 }}
+              viewport={{ once: true }}
+            >
               <StatsCard
                 icon={
                   <div className="group flex items-center justify-center w-12 h-12 rounded-full border-2 border-blue-600 bg-white transition-all duration-300 hover:bg-blue-600">
-                    <Hammer className="w-6 h-6 transition-all duration-300 group-hover:stroke-white" stroke="#2563eb" fill="none" strokeWidth={2.2} />
+                    <Hammer className="w-6 h-6 group-hover:stroke-white" stroke="#2563eb" />
                   </div>
                 }
                 title="Garantie décennale"
                 metric={10}
                 metricUnit={<span className="text-blue-600"> ans</span>}
                 subtext="De protection sur vos installations"
-                className="mx-auto bg-white border border-blue-600 text-blue-700 shadow-sm hover:shadow-lg hover:shadow-blue-100 transition-all [&_h2]:text-blue-600"
+                className="bg-white border border-blue-600 text-blue-700 shadow-sm hover:shadow-lg hover:shadow-blue-100 transition-all"
               />
             </motion.div>
 
-            {/* SATISFACTION CLIENT */}
-            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }} viewport={{ once: true }}>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
               <StatsCard
                 icon={
                   <div className="group flex items-center justify-center w-12 h-12 rounded-full border-2 border-blue-600 bg-white transition-all duration-300 hover:bg-blue-600">
-                    <Smile className="w-6 h-6 transition-all duration-300 group-hover:stroke-white" stroke="#2563eb" fill="none" strokeWidth={2.2} />
+                    <Smile className="w-6 h-6 group-hover:stroke-white" stroke="#2563eb" />
                   </div>
                 }
                 title="Satisfaction client"
                 metric={90}
                 metricUnit={<span className="text-blue-600">%</span>}
                 subtext="De nos clients nous recommandent"
-                className="mx-auto bg-white border border-blue-600 text-blue-700 shadow-sm hover:shadow-lg hover:shadow-blue-100 transition-all [&_h2]:text-blue-600"
+                className="bg-white border border-blue-600 text-blue-700 shadow-sm hover:shadow-lg hover:shadow-blue-100 transition-all"
               />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Animation carrousel logos */}
+      {/* ✅ Animation carrousel */}
       <style>{`
         @keyframes scroll-left {
           0% { transform: translateX(0); }
@@ -161,83 +168,71 @@ export default function HomePage({ onNavigate, scrollToSection }: HomePageProps)
         .animate-scroll-infinite:hover { animation-play-state: paused; }
       `}</style>
 
-      {/* ✅ NOS SERVICES */}
-      <section id="services" className="pt-24 pb-32 bg-white border-t border-gray-100">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-16">
-            Nos services
-          </h2>
+<section id="services" className="pt-24 pb-32 bg-white border-t border-gray-100">
+  <div className="max-w-6xl mx-auto px-6 text-center">
+    <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-16">
+      Nos services
+    </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {[
-  { img: "/eau.webp", title: "Pompe à chaleur Air/Eau", text: "Chauffez votre maison et votre eau avec une pompe à chaleur performante et économique.", link: "air-eau" },
-  { img: "/air.webp", title: "Pompe à chaleur Air/Air", text: "Chauffage et climatisation réversible pour un confort optimal toute l'année.", link: "air-air" },
-  { img: "/entretien.webp", title: "Entretien & Dépannage", text: "Entretien régulier et dépannage rapide par nos techniciens qualifiés.", link: "entretien" },
-  { img: "/collectif.webp", title: "Chauffage collectif", text: "Solutions de chauffage centralisées pour copropriétés et immeubles.", link: "collectif" },
-].map((service, index) => (
-  <div
-    key={index}
-    className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 relative"
-  >
-    {/* Image */}
-    <div className="overflow-hidden h-72">
-      <img
-        src={service.img}
-        alt={service.title}
-        className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
-      />
-    </div>
-
-    {/* Contenu visible en permanence */}
-    <div className="p-6 pt-6 text-left flex flex-col justify-between h-[300px] transition-all duration-300 text-gray-700">
-      <div>
-        <h3 className="text-2xl font-semibold mb-3 text-gray-900">{service.title}</h3>
-        <p className="text-gray-600 leading-relaxed mb-4">{service.text}</p>
-      </div>
-
-      {/* Boutons visibles */}
-      <div className="flex flex-wrap gap-3 mt-2">
-        {/* 🔹 Bouton principal (bleu) */}
-        <button
-          onClick={() => onNavigate("contact")}
-          className="flex-1 bg-blue-700 text-white border-2 border-blue-700 py-3 rounded-md font-medium hover:bg-white hover:text-blue-700 transition-all"
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {Object.values(servicesData).map((service) => (
+        <div
+          key={service.id}
+          className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col"
         >
-          Obtenir un devis
-        </button>
+          {/* Image */}
+          <div className="overflow-hidden h-64">
+            <img
+              src={service.image}
+              alt={service.title}
+              className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+            />
+          </div>
 
-        {/* ⚪ Bouton secondaire (blanc) */}
-        <button
-          onClick={() => onNavigate(service.link)}
-          className="flex-1 bg-white text-blue-700 border-2 border-blue-700 py-3 rounded-md font-medium hover:bg-blue-700 hover:text-white transition-all"
-        >
-          En savoir plus
-        </button>
-      </div>
-    </div>
-  </div>
-))}
+          {/* Contenu */}
+          <div className="p-6 flex flex-col justify-between flex-1">
+            <div>
+              <h3 className="text-2xl font-semibold mb-3 text-gray-900">
+                {service.title}
+              </h3>
+              <p className="text-gray-600 leading-relaxed mb-6 line-clamp-4">
+                {service.description}
+              </p>
+            </div>
 
+            {/* Boutons */}
+            <div className="flex flex-wrap gap-3 mt-auto">
+              <button
+                onClick={() => onNavigate("contact")}
+                className="flex-1 bg-blue-700 text-white border-2 border-blue-700 py-3 rounded-md font-medium hover:bg-white hover:text-blue-700 transition-all"
+              >
+                Obtenir un devis
+              </button>
 
+              <button
+                onClick={() => onNavigate(service.id)}
+                className="flex-1 bg-white text-blue-700 border-2 border-blue-700 py-3 rounded-md font-medium hover:bg-blue-700 hover:text-white transition-all"
+              >
+                En savoir plus
+              </button>
+            </div>
           </div>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
-            {/* ✅ AVIS GOOGLE */}
-            <section
-        id="avis"
-        className="pt-28 pb-28 bg-white border-t border-gray-100 relative overflow-hidden"
-      >
+
+      {/* ✅ AVIS GOOGLE */}
+      <section id="avis" className="pt-28 pb-28 bg-white border-t border-gray-100 relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-36">
             Ils parlent de nous
           </h2>
 
           <div className="flex flex-col items-center mb-12">
-            <img
-              src="/Google-logo.svg"
-              alt="Avis Google"
-              className="w-28 h-auto object-contain mb-3"
-            />
+            <img src="/Google-logo.svg" alt="Avis Google" className="w-28 h-auto object-contain mb-3" />
             <p className="text-lg text-gray-700">
               <span className="font-bold text-blue-600 text-xl">★★★★★</span> 4.9/5 sur Google
             </p>
@@ -252,7 +247,6 @@ export default function HomePage({ onNavigate, scrollToSection }: HomePageProps)
                 { text: "Service client réactif et installation propre.", image: "https://i.pravatar.cc/100?img=3", name: "Marie C.", role: "Boulogne-Billancourt" },
               ]}
             />
-
             <TestimonialsColumn
               duration={24}
               testimonials={[
@@ -261,7 +255,6 @@ export default function HomePage({ onNavigate, scrollToSection }: HomePageProps)
                 { text: "Excellent suivi après installation.", image: "https://i.pravatar.cc/100?img=6", name: "Clara B.", role: "Rueil-Malmaison" },
               ]}
             />
-
             <TestimonialsColumn
               duration={22}
               testimonials={[
