@@ -13,14 +13,15 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // ✅ Fermer les menus quand on clique ailleurs
+  // ✅ Ferme uniquement si on clique *en dehors du menu*
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
       if (
         menuRef.current &&
-        !menuRef.current.contains(event.target as Node) &&
+        !menuRef.current.contains(target) &&
         dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
+        !dropdownRef.current.contains(target)
       ) {
         setMenuOpen(false);
         setServicesOpen(false);
@@ -41,7 +42,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
   return (
     <header className="sticky top-0 left-0 w-full z-50 shadow-md">
-      {/* Barre supérieure (infos contact) */}
+      {/* Barre supérieure */}
       <div className="bg-blue-600 text-white text-sm">
         <div className="max-w-7xl mx-auto px-4 py-2 flex flex-wrap justify-center md:justify-end items-center gap-6">
           <div className="flex items-center gap-2">
@@ -84,10 +85,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                 onClick={() => setServicesOpen(!servicesOpen)}
                 className={`font-medium flex items-center gap-1 ${
                   currentPage.startsWith('air') ||
-                  currentPage === 'chaudiere' ||
-                  currentPage === 'ventilation' ||
-                  currentPage === 'collectif' ||
-                  currentPage === 'entretien'
+                  ['chaudiere', 'ventilation', 'collectif', 'entretien'].includes(currentPage)
                     ? 'text-blue-600'
                     : 'text-gray-700 hover:text-blue-600'
                 }`}
@@ -104,7 +102,6 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                       onClick={() => {
                         onNavigate(item.id);
                         setServicesOpen(false);
-                        setMenuOpen(false);
                       }}
                       className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
                     >
@@ -116,49 +113,32 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             </div>
 
             <button
-              onClick={() => {
-                onNavigate('home');
-                setMenuOpen(false);
-                setServicesOpen(false);
-              }}
+              onClick={() => onNavigate('home')}
               className={`font-medium ${
-                currentPage === 'home'
-                  ? 'text-blue-600'
-                  : 'text-gray-700 hover:text-blue-600'
+                currentPage === 'home' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
               }`}
             >
               Accueil
             </button>
 
             <button
-              onClick={() => {
-                onNavigate('contact');
-                setMenuOpen(false);
-                setServicesOpen(false);
-              }}
+              onClick={() => onNavigate('contact')}
               className={`font-medium ${
-                currentPage === 'contact'
-                  ? 'text-blue-600'
-                  : 'text-gray-700 hover:text-blue-600'
+                currentPage === 'contact' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
               }`}
             >
               Contact
             </button>
 
-            {/* CTA Devis */}
             <button
-              onClick={() => {
-                onNavigate('contact');
-                setMenuOpen(false);
-                setServicesOpen(false);
-              }}
+              onClick={() => onNavigate('contact')}
               className="ml-4 bg-blue-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-white hover:text-blue-600 border-2 border-blue-600 transition-colors"
             >
               Obtenir un devis
             </button>
           </nav>
 
-          {/* Menu mobile */}
+          {/* Bouton menu mobile */}
           <button
             className="md:hidden text-blue-600"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -180,13 +160,9 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
         {/* Menu mobile */}
         {menuOpen && (
-          <nav className="md:hidden mt-4 pb-4 flex flex-col gap-3 px-4">
+          <nav className="md:hidden mt-4 pb-4 flex flex-col gap-3 px-4" ref={dropdownRef}>
             <button
-              onClick={() => {
-                onNavigate('home');
-                setMenuOpen(false);
-                setServicesOpen(false);
-              }}
+              onClick={() => onNavigate('home')}
               className={`text-left py-2 font-medium ${
                 currentPage === 'home'
                   ? 'text-blue-600'
@@ -209,11 +185,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                   {servicesList.map((item) => (
                     <button
                       key={item.id}
-                      onClick={() => {
-                        onNavigate(item.id);
-                        setMenuOpen(false);
-                        setServicesOpen(false);
-                      }}
+                      onClick={() => onNavigate(item.id)}
                       className="text-left py-2 text-gray-700 hover:text-blue-600"
                     >
                       {item.label}
@@ -224,11 +196,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             </div>
 
             <button
-              onClick={() => {
-                onNavigate('contact');
-                setMenuOpen(false);
-                setServicesOpen(false);
-              }}
+              onClick={() => onNavigate('contact')}
               className={`text-left py-2 font-medium ${
                 currentPage === 'contact'
                   ? 'text-blue-600'
@@ -238,13 +206,8 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               Contact
             </button>
 
-            {/* CTA mobile */}
             <button
-              onClick={() => {
-                onNavigate('contact');
-                setMenuOpen(false);
-                setServicesOpen(false);
-              }}
+              onClick={() => onNavigate('contact')}
               className="mt-2 bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-white hover:text-blue-600 border-2 border-blue-600 transition-colors"
             >
               Obtenir un devis
