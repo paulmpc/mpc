@@ -67,17 +67,22 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
       {/* Navbar principale */}
       <div className="bg-white/90 backdrop-blur-md">
         <div ref={menuRef} className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          {/* Logo */}
-          <button
-            onClick={() => {
-              onNavigate('home');
-              setMenuOpen(false);
-              setServicesOpen(false);
-            }}
-            className="text-2xl font-bold text-blue-600 hover:text-blue-700"
-          >
-            MPC Chauffage
-          </button>
+{/* ✅ Logo agrandi */}
+<button
+  onClick={() => {
+    onNavigate('home');
+    setMenuOpen(false);
+    setServicesOpen(false);
+  }}
+  className="flex items-center gap-2"
+>
+  <img
+    src="/MPC.png"
+    alt="MPC Chauffage"
+    className="h-16 sm:h-20 w-auto object-contain"
+  />
+</button>
+
 
           {/* Menu Desktop */}
           <nav className="hidden md:flex items-center gap-6">
@@ -179,7 +184,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             <button
               onClick={() => {
                 onNavigate('home');
-                setMenuOpen(false); // ✅ ferme le menu après navigation
+                setMenuOpen(false);
                 setServicesOpen(false);
               }}
               className={`text-left py-2 font-medium ${
@@ -207,7 +212,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
                       key={item.id}
                       onClick={() => {
                         onNavigate(item.id);
-                        setMenuOpen(false); // ✅ ferme après navigation mobile
+                        setMenuOpen(false);
                         setServicesOpen(false);
                       }}
                       className="text-left py-2 text-gray-700 hover:text-blue-600"
@@ -222,7 +227,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             <button
               onClick={() => {
                 onNavigate('contact');
-                setMenuOpen(false); // ✅ ferme le menu
+                setMenuOpen(false);
                 setServicesOpen(false);
               }}
               className={`text-left py-2 font-medium ${
@@ -237,7 +242,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             <button
               onClick={() => {
                 onNavigate('contact');
-                setMenuOpen(false); // ✅ ferme le menu
+                setMenuOpen(false);
                 setServicesOpen(false);
               }}
               className="mt-2 bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-white hover:text-blue-600 border-2 border-blue-600 transition-colors"
