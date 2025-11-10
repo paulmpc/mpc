@@ -208,26 +208,54 @@ export default function HomePage({ onNavigate, scrollToSection }: HomePageProps)
         </div>
       </section>
 
-      {/* ✅ AVIS GOOGLE */}
-      <section id="avis" className="pt-28 pb-28 bg-white border-t border-gray-100 relative overflow-hidden">
+            {/* ✅ AVIS GOOGLE */}
+            <section
+        id="avis"
+        className="pt-28 pb-28 bg-white border-t border-gray-100 relative overflow-hidden"
+      >
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-36">
             Ils parlent de nous
           </h2>
 
           <div className="flex flex-col items-center mb-12">
-            <img src="/Google-logo.svg" alt="Avis Google" className="w-28 h-auto object-contain mb-3" />
+            <img
+              src="/Google-logo.svg"
+              alt="Avis Google"
+              className="w-28 h-auto object-contain mb-3"
+            />
             <p className="text-lg text-gray-700">
               <span className="font-bold text-blue-600 text-xl">★★★★★</span> 4.9/5 sur Google
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center overflow-hidden h-[420px]">
-            <TestimonialsColumn duration={20} testimonials={[
-              { text: "Travail impeccable et équipe très professionnelle.", image: "https://i.pravatar.cc/100?img=1", name: "Sophie M.", role: "Paris 15e" },
-              { text: "Installation rapide et efficace. Très pro.", image: "https://i.pravatar.cc/100?img=2", name: "Laurent D.", role: "Versailles" },
-              { text: "Service client réactif et installation propre.", image: "https://i.pravatar.cc/100?img=3", name: "Marie C.", role: "Boulogne-Billancourt" },
-            ]} />
+            <TestimonialsColumn
+              duration={20}
+              testimonials={[
+                { text: "Travail impeccable et équipe très professionnelle.", image: "https://i.pravatar.cc/100?img=1", name: "Sophie M.", role: "Paris 15e" },
+                { text: "Installation rapide et efficace. Très pro.", image: "https://i.pravatar.cc/100?img=2", name: "Laurent D.", role: "Versailles" },
+                { text: "Service client réactif et installation propre.", image: "https://i.pravatar.cc/100?img=3", name: "Marie C.", role: "Boulogne-Billancourt" },
+              ]}
+            />
+
+            <TestimonialsColumn
+              duration={24}
+              testimonials={[
+                { text: "Je recommande MPC à 100% ! Travail soigné et ponctuel.", image: "https://i.pravatar.cc/100?img=4", name: "Antoine P.", role: "Nanterre" },
+                { text: "Techniciens au top, très professionnels.", image: "https://i.pravatar.cc/100?img=5", name: "Julie T.", role: "Saint-Cloud" },
+                { text: "Excellent suivi après installation.", image: "https://i.pravatar.cc/100?img=6", name: "Clara B.", role: "Rueil-Malmaison" },
+              ]}
+            />
+
+            <TestimonialsColumn
+              duration={22}
+              testimonials={[
+                { text: "Très satisfait de ma pompe à chaleur installée par MPC.", image: "https://i.pravatar.cc/100?img=7", name: "Paul L.", role: "Pontoise" },
+                { text: "Un vrai service client, ça fait plaisir.", image: "https://i.pravatar.cc/100?img=8", name: "Isabelle F.", role: "Meudon" },
+                { text: "Rien à redire, entreprise sérieuse et réactive.", image: "https://i.pravatar.cc/100?img=9", name: "Marc A.", role: "Colombes" },
+              ]}
+            />
           </div>
         </div>
       </section>

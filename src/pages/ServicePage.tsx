@@ -95,8 +95,8 @@ export default function ServicePage({
       {/* CONTENU DÉTAILLÉ */}
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-3 gap-12">
-          {/* Texte long */}
-          <div className="lg:col-span-2">
+          {/* Texte + blocs côte à côte */}
+          <div className="lg:col-span-2 space-y-10">
             <div className="prose max-w-none">
               {content.map((paragraph, i) => (
                 <p key={i} className="text-lg text-gray-700 leading-relaxed mb-6">
@@ -104,22 +104,15 @@ export default function ServicePage({
                 </p>
               ))}
             </div>
-          </div>
 
-          {/* Formulaire + avantages MPC */}
-          <aside className="lg:col-span-1">
-            <div className="sticky top-24 space-y-8">
-              <ContactForm compact />
-
-              <div className="bg-gray-50 rounded-lg p-6">
+            {/* ✅ Les deux blocs côte à côte */}
+            <div className="grid sm:grid-cols-2 gap-8">
+              {/* Bloc "Pourquoi choisir MPC ?" */}
+              <div className="bg-gray-50 rounded-xl p-6 shadow-md hover:shadow-lg transition-all">
                 <h3 className="font-bold text-lg text-gray-900 mb-4">
                   Pourquoi choisir MPC ?
                 </h3>
                 <ul className="space-y-3 text-gray-700">
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="text-blue-600 mt-0.5" size={20} />
-                    <span>Devis gratuit sous 24h</span>
-                  </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="text-blue-600 mt-0.5" size={20} />
                     <span>Garantie décennale</span>
@@ -135,8 +128,8 @@ export default function ServicePage({
                 </ul>
               </div>
 
-              {/* Avantages de la solution */}
-              <div className="bg-blue-50 rounded-lg p-6">
+              {/* Bloc "Les avantages de cette solution" */}
+              <div className="bg-blue-50 rounded-xl p-6 shadow-md hover:shadow-lg transition-all">
                 <h3 className="text-lg font-bold text-gray-900 mb-4">
                   Les avantages de cette solution
                 </h3>
@@ -149,6 +142,13 @@ export default function ServicePage({
                   ))}
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Colonne droite : uniquement le formulaire */}
+          <aside className="lg:col-span-1">
+            <div className="sticky top-24">
+              <ContactForm compact />
             </div>
           </aside>
         </div>

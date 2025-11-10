@@ -4,7 +4,7 @@ export interface ServiceData {
   description: string;
   benefits: string[];
   content: string[];
-  image: string; // ✅ nouvelle propriété
+  image: string;
 }
 
 export const servicesData: Record<string, ServiceData> = {
@@ -25,8 +25,9 @@ export const servicesData: Record<string, ServiceData> = {
       "Nous intervenons partout en Île-de-France pour l'installation de pompes à chaleur adaptées à tous types de logements.",
       "Avec MPC, vous bénéficiez d'un service complet : étude personnalisée, installation professionnelle, mise en service, et service après-vente réactif.",
     ],
-    image: '/eau.webp', // ✅ image corrigée
+    image: '/eau.webp',
   },
+
   'air-air': {
     id: 'air-air',
     title: 'Solution pompe à chaleur air/air – confort et performance',
@@ -46,28 +47,9 @@ export const servicesData: Record<string, ServiceData> = {
       "Les modèles récents sont particulièrement silencieux et économes en énergie.",
       "Nous proposons des équipements de marques reconnues avec garantie constructeur et garantie décennale sur l'installation.",
     ],
-    image: '/air.webp', // ✅ image corrigée
+    image: '/air.webp',
   },
-  'chaudiere': {
-    id: 'chaudiere',
-    title: 'Remplacement de chaudière par une pompe à chaleur',
-    description:
-      'Remplacez votre ancienne chaudière par une pompe à chaleur plus performante et écologique.',
-    benefits: [
-      'Réduction de 40% de vos factures',
-      'Solution hybride disponible',
-      "Accompagnement sur les aides",
-      'Installation en remplacement direct',
-      'Compatible avec vos radiateurs',
-    ],
-    content: [
-      "Vous possédez une chaudière gaz ou fioul vieillissante ? Il est temps de passer à une solution plus performante et respectueuse de l'environnement.",
-      "Nous proposons des systèmes hybrides qui combinent pompe à chaleur et chaudière pour optimiser votre confort et vos économies.",
-      "MPC réalise une étude gratuite de votre installation et vous accompagne dans les démarches pour obtenir les aides de l'État.",
-      "Nos techniciens expérimentés assurent l'installation complète et la mise en service.",
-    ],
-    image: '/chaudiere.webp', // ✅ (si tu as ce fichier)
-  },
+
   'collectif': {
     id: 'collectif',
     title: 'Chauffage collectif pour immeubles et bâtiments professionnels',
@@ -85,8 +67,9 @@ export const servicesData: Record<string, ServiceData> = {
       "Nos solutions incluent pompes à chaleur de grande puissance, chaudières haute performance et systèmes d'eau chaude sanitaire.",
       "MPC propose des contrats de maintenance adaptés et un service technique 7j/7.",
     ],
-    image: '/collectif.webp', // ✅ image corrigée
+    image: '/collectif.webp',
   },
+
   'entretien': {
     id: 'entretien',
     title: 'Entretien de vos systèmes de chauffage',
@@ -105,6 +88,6 @@ export const servicesData: Record<string, ServiceData> = {
       "Nos techniciens certifiés réalisent les contrôles réglementaires et les interventions préventives.",
       "Avec un contrat MPC, vous bénéficiez d'un service réactif dans toute l'Île-de-France.",
     ],
-    image: '/entretien.webp', // ✅ image corrigée
+    image: '/entretien.webp',
   },
 };

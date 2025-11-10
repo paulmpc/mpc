@@ -134,6 +134,7 @@ Merci de me contacter pour un devis.
             <option>Pompe à chaleur chaudière</option>
             <option>Chauffage collectif</option>
             <option>Entretien</option>
+            <option>Autre</option> {/* ✅ nouvelle option ajoutée */}
           </select>
         </div>
 
