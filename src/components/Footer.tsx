@@ -58,7 +58,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                   onClick={() => onNavigate('chaudiere')}
                   className="text-gray-300 hover:text-blue-400 transition-colors"
                 >
-                  PAC Chaudière
+                  Chaudière
                 </button>
               </li>
               <li>
@@ -83,7 +83,6 @@ export default function Footer({ onNavigate }: FooterProps) {
           <div>
             <h4 className="text-lg font-semibold mb-4">Informations</h4>
             <ul className="space-y-2 text-gray-300">
-              <li>Devis gratuit</li>
               <li>Garantie décennale</li>
               <li>Zone: Île-de-France</li>
             </ul>

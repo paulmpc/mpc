@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 interface ContactFormProps {
   compact?: boolean;
@@ -6,12 +6,12 @@ interface ContactFormProps {
 
 export default function ContactForm({ compact = false }: ContactFormProps) {
   const [formData, setFormData] = useState({
-    nom: '',
-    prenom: '',
-    telephone: '',
-    ville: '',
-    codePostal: '',
-    objet: 'Pompe à chaleur air/eau',
+    nom: "",
+    prenom: "",
+    telephone: "",
+    ville: "",
+    codePostal: "",
+    objet: "Pompe à chaleur air/eau",
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -21,7 +21,7 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
     setLoading(true);
 
     const mailto = `mailto:contact@mpc-chauffage.fr?subject=${encodeURIComponent(
-      `Demande de devis - ${formData.objet}`
+      `Demande de contact - ${formData.objet}`
     )}&body=${encodeURIComponent(
       `
 Nom : ${formData.nom}
@@ -31,32 +31,37 @@ Ville : ${formData.ville}
 Code postal : ${formData.codePostal}
 Objet : ${formData.objet}
 
-Merci de me contacter pour un devis.
+Merci de me contacter pour discuter de mon projet.
 `
     )}`;
 
     window.location.href = mailto;
-
     setSuccess(true);
     setFormData({
-      nom: '',
-      prenom: '',
-      telephone: '',
-      ville: '',
-      codePostal: '',
-      objet: 'Pompe à chaleur air/eau',
+      nom: "",
+      prenom: "",
+      telephone: "",
+      ville: "",
+      codePostal: "",
+      objet: "Pompe à chaleur air/eau",
     });
     setLoading(false);
   };
 
   return (
-    <div className={`bg-white rounded-lg shadow-lg ${compact ? 'p-6' : 'p-8'}`}>
-      <h3 className="text-2xl font-bold text-blue-600 mb-6">
-        Demandez votre devis gratuit
-      </h3>
+    <div className={`bg-white rounded-2xl shadow-lg ${compact ? "p-6" : "p-10"}`}>
+      {/* ✅ Nouveau titre modernisé */}
+      <div className="text-center mb-8">
+        <p className="text-blue-500 uppercase text-sm tracking-wide mb-2">
+          Contactez-nous
+        </p>
+        <h3 className="text-3xl md:text-4xl font-bold text-blue-600">
+          Quel est votre projet ?
+        </h3>
+      </div>
 
       {success && (
-        <div className="mb-6 p-4 bg-blue-50 text-blue-800 rounded-md">
+        <div className="mb-6 p-4 bg-blue-50 text-blue-800 rounded-md text-center">
           ✅ Votre email a été préparé — envoyez-le depuis votre messagerie !
         </div>
       )}
@@ -73,7 +78,6 @@ Merci de me contacter pour un devis.
               className="w-full px-4 py-2 border rounded-md"
             />
           </div>
-
           <div>
             <label className="block text-sm font-medium mb-1">Prénom *</label>
             <input
@@ -108,7 +112,6 @@ Merci de me contacter pour un devis.
               className="w-full px-4 py-2 border rounded-md"
             />
           </div>
-
           <div>
             <label className="block text-sm font-medium mb-1">Code postal *</label>
             <input
@@ -116,7 +119,9 @@ Merci de me contacter pour un devis.
               required
               pattern="[0-9]{5}"
               value={formData.codePostal}
-              onChange={(e) => setFormData({ ...formData, codePostal: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, codePostal: e.target.value })
+              }
               className="w-full px-4 py-2 border rounded-md"
             />
           </div>
@@ -126,24 +131,28 @@ Merci de me contacter pour un devis.
           <label className="block text-sm font-medium mb-1">Objet *</label>
           <select
             value={formData.objet}
-            onChange={(e) => setFormData({ ...formData, objet: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, objet: e.target.value })
+            }
             className="w-full px-4 py-2 border rounded-md"
           >
             <option>Pompe à chaleur air/eau</option>
             <option>Pompe à chaleur air/air</option>
-            <option>Pompe à chaleur chaudière</option>
+            <option>Chaudière</option>
             <option>Chauffage collectif</option>
             <option>Entretien</option>
-            <option>Autre</option> {/* ✅ nouvelle option ajoutée */}
+            <option>Ventilation</option> {/* ✅ ajout ici */}
+            <option>Autre</option>
           </select>
         </div>
 
+        {/* ✅ Nouveau CTA */}
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-blue-700 disabled:opacity-50"
+          className="w-full bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-blue-700 disabled:opacity-50 transition-all"
         >
-          {loading ? 'Envoi...' : 'Être rappelé gratuitement'}
+          {loading ? "Envoi..." : "Lançons votre projet "}
         </button>
       </form>
     </div>
