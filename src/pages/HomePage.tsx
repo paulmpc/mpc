@@ -169,49 +169,55 @@ export default function HomePage({ onNavigate, scrollToSection }: HomePageProps)
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {[
-              { img: "/eau.webp", title: "Pompe à chaleur Air/Eau", text: "Chauffez votre maison et votre eau avec une pompe à chaleur performante et économique.", link: "air-eau" },
-              { img: "/air.webp", title: "Pompe à chaleur Air/Air", text: "Chauffage et climatisation réversible pour un confort optimal toute l'année.", link: "air-air" },
-              { img: "/entretien.webp", title: "Entretien & Dépannage", text: "Entretien régulier et dépannage rapide par nos techniciens qualifiés.", link: "entretien" },
-              { img: "/collectif.webp", title: "Chauffage collectif", text: "Solutions de chauffage centralisées pour copropriétés et immeubles.", link: "collectif" },
-            ].map((service, index) => (
-              <div
-                key={index}
-                className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:bg-blue-600 relative"
-              >
-                <div className="overflow-hidden h-80">
-                  <img
-                    src={service.img}
-                    alt={service.title}
-                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                  />
-                </div>
+          {[
+  { img: "/eau.webp", title: "Pompe à chaleur Air/Eau", text: "Chauffez votre maison et votre eau avec une pompe à chaleur performante et économique.", link: "air-eau" },
+  { img: "/air.webp", title: "Pompe à chaleur Air/Air", text: "Chauffage et climatisation réversible pour un confort optimal toute l'année.", link: "air-air" },
+  { img: "/entretien.webp", title: "Entretien & Dépannage", text: "Entretien régulier et dépannage rapide par nos techniciens qualifiés.", link: "entretien" },
+  { img: "/collectif.webp", title: "Chauffage collectif", text: "Solutions de chauffage centralisées pour copropriétés et immeubles.", link: "collectif" },
+].map((service, index) => (
+  <div
+    key={index}
+    className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 relative"
+  >
+    {/* Image */}
+    <div className="overflow-hidden h-72">
+      <img
+        src={service.img}
+        alt={service.title}
+        className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+      />
+    </div>
 
-                <div className="p-6 pt-8 text-left flex flex-col justify-between h-[330px] transition-all duration-300 group-hover:text-white">
-                  <div>
-                    <h3 className="text-2xl font-semibold mb-3">{service.title}</h3>
-                    <p className="text-gray-600 group-hover:text-blue-100 leading-relaxed mb-6">
-                      {service.text}
-                    </p>
-                  </div>
+    {/* Contenu visible en permanence */}
+    <div className="p-6 pt-6 text-left flex flex-col justify-between h-[300px] transition-all duration-300 text-gray-700">
+      <div>
+        <h3 className="text-2xl font-semibold mb-3 text-gray-900">{service.title}</h3>
+        <p className="text-gray-600 leading-relaxed mb-4">{service.text}</p>
+      </div>
 
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-wrap gap-3">
-                    <button
-                      onClick={() => onNavigate("contact")}
-                      className="flex-1 bg-white text-blue-600 py-3 rounded-md font-medium hover:bg-blue-100 transition-all"
-                    >
-                      Obtenir un devis
-                    </button>
-                    <button
-                      onClick={() => onNavigate(service.link)}
-                      className="flex-1 border-2 border-white text-white py-3 rounded-md font-medium hover:bg-white hover:text-blue-600 transition-all"
-                    >
-                      En savoir plus
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
+      {/* Boutons visibles */}
+      <div className="flex flex-wrap gap-3 mt-2">
+        {/* 🔹 Bouton principal (bleu) */}
+        <button
+          onClick={() => onNavigate("contact")}
+          className="flex-1 bg-blue-700 text-white border-2 border-blue-700 py-3 rounded-md font-medium hover:bg-white hover:text-blue-700 transition-all"
+        >
+          Obtenir un devis
+        </button>
+
+        {/* ⚪ Bouton secondaire (blanc) */}
+        <button
+          onClick={() => onNavigate(service.link)}
+          className="flex-1 bg-white text-blue-700 border-2 border-blue-700 py-3 rounded-md font-medium hover:bg-blue-700 hover:text-white transition-all"
+        >
+          En savoir plus
+        </button>
+      </div>
+    </div>
+  </div>
+))}
+
+
           </div>
         </div>
       </section>

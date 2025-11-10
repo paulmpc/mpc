@@ -10,57 +10,72 @@ function App() {
   const [currentPage, setCurrentPage] = useState("home");
   const [scrollToSection, setScrollToSection] = useState<string | null>(null);
 
+  // 🔁 Navigation entre les pages
   const handleNavigate = (page: string, section?: string) => {
     setCurrentPage(page);
     setScrollToSection(section || null);
+    window.scrollTo({ top: 0, behavior: "auto" });
   };
 
+  // 🧠 Mise à jour dynamique du titre du document
   useEffect(() => {
     const pageTitle =
       currentPage === "home"
         ? "MPC Chauffage - Expert en pompes à chaleur en Île-de-France"
         : currentPage === "contact"
         ? "Contact - MPC Chauffage"
-        : servicesData[currentPage]?.title || "MPC Chauffage";
+        : servicesData[currentPage]?.title ||
+          "MPC Chauffage - Solutions de chauffage et climatisation";
 
     document.title = pageTitle;
   }, [currentPage]);
 
+  // 🧩 Rendu conditionnel des pages
   const renderPage = () => {
-    // 🏠 Page d’accueil classique
-    if (currentPage === "home") {
-      return (
-        <HomePage onNavigate={handleNavigate} scrollToSection={scrollToSection} />
-      );
-    }
+    switch (currentPage) {
+      case "home":
+        return (
+          <HomePage
+            onNavigate={handleNavigate}
+            scrollToSection={scrollToSection}
+          />
+        );
 
-    // 📞 Page contact
-    if (currentPage === "contact") {
-      return <ContactPage />;
-    }
+      case "contact":
+        return <ContactPage />;
 
-    // 🔙 Retour à la section "Nos services"
-    if (currentPage === "nos-services") {
-      return <HomePage onNavigate={handleNavigate} scrollToSection="services" />;
-    }
+      case "nos-services":
+        return (
+          <HomePage
+            onNavigate={handleNavigate}
+            scrollToSection="services"
+          />
+        );
 
-    // ⚙️ Pages descriptives dynamiques
-    if (servicesData[currentPage]) {
-      const service = servicesData[currentPage];
-      return (
-        <ServicePage
-          title={service.title}
-          description={service.description}
-          benefits={service.benefits}
-          content={service.content}
-          image={service.image}
-          onNavigate={handleNavigate}
-        />
-      );
-    }
+      default:
+        // 🔹 Cas où la page correspond à un service (air-eau, air-air, chaudiere, ventilation, etc.)
+        if (servicesData[currentPage]) {
+          const service = servicesData[currentPage];
+          return (
+            <ServicePage
+              title={service.title}
+              description={service.description}
+              benefits={service.benefits}
+              content={service.content}
+              image={service.image}
+              onNavigate={handleNavigate}
+            />
+          );
+        }
 
-    // 🧭 Fallback
-    return <HomePage onNavigate={handleNavigate} />;
+        // 🔸 Fallback : retour à la home
+        return (
+          <HomePage
+            onNavigate={handleNavigate}
+            scrollToSection={scrollToSection}
+          />
+        );
+    }
   };
 
   return (

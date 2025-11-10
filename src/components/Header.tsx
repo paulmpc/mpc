@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ChevronDown, Mail, Phone, Clock } from 'lucide-react';
 
 interface HeaderProps {
@@ -10,6 +10,35 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
 
+  const menuRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // ✅ Fermer les menus quand on clique ailleurs
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setMenuOpen(false);
+        setServicesOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const servicesList = [
+    { id: 'air-eau', label: 'PAC Air/Eau' },
+    { id: 'air-air', label: 'PAC Air/Air' },
+    { id: 'chaudiere', label: 'Chaudière' },
+    { id: 'ventilation', label: 'Ventilation' },
+    { id: 'collectif', label: 'Chauffage Collectif' },
+    { id: 'entretien', label: 'Entretien' },
+  ];
+
   return (
     <header className="sticky top-0 left-0 w-full z-50 shadow-md">
       {/* Barre supérieure (infos contact) */}
@@ -17,19 +46,13 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
         <div className="max-w-7xl mx-auto px-4 py-2 flex flex-wrap justify-center md:justify-end items-center gap-6">
           <div className="flex items-center gap-2">
             <Mail size={16} className="text-blue-100" />
-            <a
-              href="mailto:paul-adc@mpc75.fr"
-              className="hover:text-blue-200 transition-colors"
-            >
+            <a href="mailto:paul-adc@mpc75.fr" className="hover:text-blue-200 transition-colors">
               paul-adc@mpc75.fr
             </a>
           </div>
           <div className="flex items-center gap-2">
             <Phone size={16} className="text-blue-100" />
-            <a
-              href="tel:+33685717013"
-              className="hover:text-blue-200 transition-colors"
-            >
+            <a href="tel:+33685717013" className="hover:text-blue-200 transition-colors">
               06 85 71 70 13
             </a>
           </div>
@@ -42,7 +65,10 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
       {/* Navbar principale */}
       <div className="bg-white/90 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <div
+          ref={menuRef}
+          className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center"
+        >
           {/* Logo */}
           <button
             onClick={() => onNavigate('home')}
@@ -53,12 +79,13 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
           {/* Menu Desktop */}
           <nav className="hidden md:flex items-center gap-6">
-            <div className="relative">
+            <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setServicesOpen(!servicesOpen)}
                 className={`font-medium flex items-center gap-1 ${
                   currentPage.startsWith('air') ||
                   currentPage === 'chaudiere' ||
+                  currentPage === 'ventilation' ||
                   currentPage === 'collectif' ||
                   currentPage === 'entretien'
                     ? 'text-blue-600'
@@ -71,18 +98,13 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
               {servicesOpen && (
                 <div className="absolute top-full left-0 mt-2 bg-white shadow-lg border border-gray-100 rounded-lg py-2 w-56">
-                  {[
-                    { id: 'air-eau', label: 'PAC Air/Eau' },
-                    { id: 'air-air', label: 'PAC Air/Air' },
-                    { id: 'chaudiere', label: 'PAC Chaudière' },
-                    { id: 'collectif', label: 'Chauffage Collectif' },
-                    { id: 'entretien', label: 'Entretien' },
-                  ].map((item) => (
+                  {servicesList.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => {
                         onNavigate(item.id);
                         setServicesOpen(false);
+                        setMenuOpen(false);
                       }}
                       className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
                     >
@@ -94,7 +116,11 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             </div>
 
             <button
-              onClick={() => onNavigate('home')}
+              onClick={() => {
+                onNavigate('home');
+                setMenuOpen(false);
+                setServicesOpen(false);
+              }}
               className={`font-medium ${
                 currentPage === 'home'
                   ? 'text-blue-600'
@@ -105,7 +131,11 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
             </button>
 
             <button
-              onClick={() => onNavigate('contact')}
+              onClick={() => {
+                onNavigate('contact');
+                setMenuOpen(false);
+                setServicesOpen(false);
+              }}
               className={`font-medium ${
                 currentPage === 'contact'
                   ? 'text-blue-600'
@@ -117,7 +147,11 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
             {/* CTA Devis */}
             <button
-              onClick={() => onNavigate('contact')}
+              onClick={() => {
+                onNavigate('contact');
+                setMenuOpen(false);
+                setServicesOpen(false);
+              }}
               className="ml-4 bg-blue-600 text-white px-5 py-2 rounded-md font-semibold hover:bg-white hover:text-blue-600 border-2 border-blue-600 transition-colors"
             >
               Obtenir un devis
@@ -136,19 +170,9 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               viewBox="0 0 24 24"
             >
               {menuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               )}
             </svg>
           </button>
@@ -161,6 +185,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               onClick={() => {
                 onNavigate('home');
                 setMenuOpen(false);
+                setServicesOpen(false);
               }}
               className={`text-left py-2 font-medium ${
                 currentPage === 'home'
@@ -181,13 +206,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               </button>
               {servicesOpen && (
                 <div className="flex flex-col pl-4">
-                  {[
-                    { id: 'air-eau', label: 'PAC Air/Eau' },
-                    { id: 'air-air', label: 'PAC Air/Air' },
-                    { id: 'chaudiere', label: 'PAC Chaudière' },
-                    { id: 'collectif', label: 'Chauffage Collectif' },
-                    { id: 'entretien', label: 'Entretien' },
-                  ].map((item) => (
+                  {servicesList.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => {
@@ -208,6 +227,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               onClick={() => {
                 onNavigate('contact');
                 setMenuOpen(false);
+                setServicesOpen(false);
               }}
               className={`text-left py-2 font-medium ${
                 currentPage === 'contact'
@@ -223,6 +243,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
               onClick={() => {
                 onNavigate('contact');
                 setMenuOpen(false);
+                setServicesOpen(false);
               }}
               className="mt-2 bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-white hover:text-blue-600 border-2 border-blue-600 transition-colors"
             >
