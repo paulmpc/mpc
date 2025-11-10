@@ -1,73 +1,15 @@
-import { Droplet, Wind, Flame, Building2, Wrench, CheckCircle, Star } from 'lucide-react';
+import { Droplet, Wind, Flame, Wrench, CheckCircle, Hammer, Smile } from "lucide-react";
+import { motion } from "framer-motion";
+import { StatsCard } from "../components/ui/activity-stats-card";
+import { TestimonialsColumn } from "../components/blocks/testimonials-columns-1";
 
 interface HomePageProps {
   onNavigate: (page: string) => void;
 }
 
 export default function HomePage({ onNavigate }: HomePageProps) {
-  const services = [
-    {
-      id: 'air-eau',
-      icon: Droplet,
-      title: 'Pompe à chaleur air/eau',
-      description: "Solution performante pour chauffer votre habitation tout en réalisant des économies d'énergie",
-    },
-    {
-      id: 'air-air',
-      icon: Wind,
-      title: 'Pompe à chaleur air/air',
-      description: "Chauffage et climatisation en un seul système pour un confort optimal toute l'année",
-    },
-    {
-      id: 'chaudiere',
-      icon: Flame,
-      title: 'PAC Chaudière',
-      description: 'Remplacez votre ancienne chaudière par une pompe à chaleur moderne et écologique',
-    },
-    {
-      id: 'collectif',
-      icon: Building2,
-      title: 'Chauffage collectif',
-      description: 'Solutions complètes pour immeubles et bâtiments professionnels',
-    },
-    {
-      id: 'entretien',
-      icon: Wrench,
-      title: 'Entretien',
-      description: 'Maintenance et entretien de vos équipements pour garantir leur durabilité',
-    },
-  ];
-
-  const clients = [
-    { name: 'Orange', color: 'text-orange-500' },
-    { name: 'Casino', color: 'text-red-600' },
-    { name: 'Carrefour', color: 'text-blue-600' },
-  ];
-
-  const testimonials = [
-    {
-      name: 'Sophie M.',
-      location: 'Paris 15e',
-      text: "Installation rapide et professionnelle. Notre facture de chauffage a diminué de 40%. Je recommande vivement MPC !",
-      rating: 5,
-    },
-    {
-      name: 'Laurent D.',
-      location: 'Versailles',
-      text: 'Excellent service, équipe très compétente. La pompe à chaleur fonctionne parfaitement depuis 2 ans.',
-      rating: 5,
-    },
-    {
-      name: 'Marie C.',
-      location: 'Boulogne-Billancourt',
-      text: 'Devis clair, travaux réalisés dans les délais. Très satisfaite de mon investissement.',
-      rating: 5,
-    },
-  ];
-
   return (
-    <div>
-
+    <div className="bg-white overflow-hidden">
       {/* HERO */}
       <section className="relative w-full h-[85vh] md:h-[90vh]">
         <img
@@ -84,14 +26,13 @@ export default function HomePage({ onNavigate }: HomePageProps) {
           </p>
           <div className="flex flex-wrap gap-4">
             <button
-              onClick={() => onNavigate('air-eau')}
+              onClick={() => onNavigate("air-eau")}
               className="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium text-base sm:text-lg hover:bg-blue-700 hover:text-white border-2 border-white transition-all"
             >
               Découvrir nos solutions
             </button>
-
             <button
-              onClick={() => onNavigate('contact')}
+              onClick={() => onNavigate("contact")}
               className="bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium text-base sm:text-lg hover:bg-white hover:text-blue-700 border-2 border-blue-700 transition-all"
             >
               Économiser maintenant
@@ -101,258 +42,241 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       </section>
 
       {/* ILS NOUS FONT CONFIANCE */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Ils nous font confiance
-            </h2>
-            <p className="text-xl text-gray-600">
-              Des grands groupes et des milliers de particuliers
-            </p>
-          </div>
+      <section className="py-16 bg-white overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-10">
+            Ils nous font confiance
+          </h2>
 
-          <div className="flex justify-center items-center gap-12 flex-wrap mb-12">
-            {clients.map((client) => (
-              <div key={client.name} className={`text-4xl font-bold ${client.color}`}>
-                {client.name}
-              </div>
-            ))}
+          {/* LOGOS EN CARROUSSEL INFINI */}
+          <div className="relative w-full overflow-hidden mb-16">
+            <div
+              className="flex items-center justify-center gap-12 animate-scroll-infinite"
+              style={{
+                animation: "scroll-left 35s linear infinite",
+              }}
+            >
+              {[
+                "orange.svg",
+                "carrefour.svg",
+                "casino.svg",
+                "cedeo.png",
+                "plateforme.png",
+                "pointp.png",
+                "isover.png",
+              ].map((logo, i) => (
+                <img
+                  key={i}
+                  src={`/${logo}`}
+                  alt={logo}
+                  className="h-12 md:h-14 object-contain"
+                />
+              ))}
+              {[
+                "orange.svg",
+                "carrefour.svg",
+                "casino.svg",
+                "cedeo.png",
+                "plateforme.png",
+                "pointp.png",
+                "isover.png",
+              ].map((logo, i) => (
+                <img
+                  key={`dup-${i}`}
+                  src={`/${logo}`}
+                  alt={logo}
+                  className="h-12 md:h-14 object-contain"
+                />
+              ))}
+            </div>
           </div>
+{/* CARDS STATISTIQUES (3 cartes) */}
+<div className="flex flex-col md:flex-row justify-center gap-10 mb-10">
+  {/* + INSTALLATIONS */}
+  <motion.div
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+    viewport={{ once: true }}
+  >
+    <StatsCard
+      icon={
+        <div className="group flex items-center justify-center w-12 h-12 rounded-full border-2 border-blue-600 bg-white transition-all duration-300 hover:bg-blue-600">
+          <CheckCircle
+            className="w-6 h-6 transition-all duration-300 group-hover:stroke-white"
+            stroke="#2563eb"
+            fill="none"
+            strokeWidth={2.2}
+          />
+        </div>
+      }
+      title="+ Installations"
+      metric={200}
+      subtext="Réalisées partout en Île-de-France"
+      className="mx-auto bg-white border border-blue-600 text-blue-700 shadow-sm hover:shadow-lg hover:shadow-blue-100 transition-all [&_h2]:text-blue-600 [&_span]:text-blue-600"
+    />
+  </motion.div>
 
-          <div className="grid gap-6 max-w-4xl mx-auto">
-            <div className="flex items-start gap-3">
-              <CheckCircle className="text-blue-600 flex-shrink-0 mt-1" size={24} />
-              <p className="text-lg text-gray-700">
-                Plus de 1000 installations réalisées en Île-de-France
-              </p>
-            </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle className="text-blue-600 flex-shrink-0 mt-1" size={24} />
-              <p className="text-lg text-gray-700">
-                Certifié RGE - Éligible aux aides de l'État
-              </p>
-            </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle className="text-blue-600 flex-shrink-0 mt-1" size={24} />
-              <p className="text-lg text-gray-700">
-                Intervention rapide - Devis sous 24h
-              </p>
-            </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle className="text-blue-600 flex-shrink-0 mt-1" size={24} />
-              <p className="text-lg text-gray-700">
-                Garantie décennale - Service après-vente réactif
-              </p>
-            </div>
-          </div>
+  {/* GARANTIE DÉCENNALE */}
+  <motion.div
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8, delay: 0.15 }}
+    viewport={{ once: true }}
+  >
+    <StatsCard
+      icon={
+        <div className="group flex items-center justify-center w-12 h-12 rounded-full border-2 border-blue-600 bg-white transition-all duration-300 hover:bg-blue-600">
+          <Hammer
+            className="w-6 h-6 transition-all duration-300 group-hover:stroke-white"
+            stroke="#2563eb"
+            fill="none"
+            strokeWidth={2.2}
+          />
+        </div>
+      }
+      title="Garantie décennale"
+      metric={10}
+      metricUnit=" ans"
+      subtext="De protection sur vos installations"
+      className="mx-auto bg-white border border-blue-600 text-blue-700 shadow-sm hover:shadow-lg hover:shadow-blue-100 transition-all [&_h2]:text-blue-600 [&_span]:text-blue-600"
+    />
+  </motion.div>
+
+  {/* SATISFACTION CLIENT */}
+  <motion.div
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8, delay: 0.3 }}
+    viewport={{ once: true }}
+  >
+    <StatsCard
+      icon={
+        <div className="group flex items-center justify-center w-12 h-12 rounded-full border-2 border-blue-600 bg-white transition-all duration-300 hover:bg-blue-600">
+          <Smile
+            className="w-6 h-6 transition-all duration-300 group-hover:stroke-white"
+            stroke="#2563eb"
+            fill="none"
+            strokeWidth={2.2}
+          />
+        </div>
+      }
+      title="Satisfaction client"
+      metric={90}
+      metricUnit="%"
+      subtext="De nos clients nous recommandent"
+      className="mx-auto bg-white border border-blue-600 text-blue-700 shadow-sm hover:shadow-lg hover:shadow-blue-100 transition-all [&_h2]:text-blue-600 [&_span]:text-blue-600"
+    />
+  </motion.div>
+</div>
+
+
+
         </div>
       </section>
+
+      {/* Animation carrousel logos */}
+      <style>{`
+        @keyframes scroll-left {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-scroll-infinite:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
 
       {/* NOS SERVICES */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Nos services
-            </h2>
-            <p className="text-xl text-gray-600">
-              Des solutions complètes pour tous vos besoins en chauffage
+      <section id="services" className="py-20 bg-white border-t border-gray-100">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-12">
+            Nos services
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div
+              onClick={() => onNavigate("air-eau")}
+              className="cursor-pointer p-8 bg-white shadow-md rounded-2xl border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            >
+              <Flame className="w-10 h-10 text-blue-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Pompe à chaleur Air/Eau</h3>
+              <p className="text-gray-600">
+                Chauffez votre maison et votre eau avec une pompe à chaleur performante et éligible aux aides de l'État.
+              </p>
+            </div>
+
+            <div
+              onClick={() => onNavigate("air-air")}
+              className="cursor-pointer p-8 bg-white shadow-md rounded-2xl border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            >
+              <Wind className="w-10 h-10 text-blue-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Pompe à chaleur Air/Air</h3>
+              <p className="text-gray-600">
+                Système de climatisation réversible pour un confort optimal été comme hiver.
+              </p>
+            </div>
+
+            <div
+              onClick={() => onNavigate("entretien")}
+              className="cursor-pointer p-8 bg-white shadow-md rounded-2xl border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            >
+              <Wrench className="w-10 h-10 text-blue-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Entretien & Dépannage</h3>
+              <p className="text-gray-600">
+                Nos techniciens assurent l’entretien et le dépannage rapide de vos équipements.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* AVIS GOOGLE */}
+      <section id="avis" className="py-20 bg-white border-t border-gray-100 relative overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-6">
+            Ils parlent de nous
+          </h2>
+
+          {/* Logo Google */}
+          <div className="flex flex-col items-center mb-10">
+            <img
+              src="/Google-logo.svg"
+              alt="Avis Google"
+              className="w-28 h-auto object-contain mb-2"
+            />
+            <p className="text-lg text-gray-700">
+              <span className="font-bold text-blue-600 text-xl">★★★★★</span> 4.9/5 sur Google
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => {
-              const Icon = service.icon;
-              return (
-                <div
-                  key={service.id}
-                  className="bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-blue-500 hover:shadow-lg transition-all cursor-pointer"
-                  onClick={() => onNavigate(service.id)}
-                >
-                  <Icon className="text-blue-600 mb-4" size={48} />
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4">{service.description}</p>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onNavigate(service.id);
-                    }}
-                    className="text-blue-600 font-semibold hover:text-blue-700"
-                  >
-                    En savoir plus →
-                  </button>
-                </div>
-              );
-            })}
+          {/* Avis défilants confinés */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center overflow-hidden h-[420px]">
+            <TestimonialsColumn
+              duration={20}
+              testimonials={[
+                { text: "Travail impeccable et équipe très professionnelle.", image: "https://i.pravatar.cc/100?img=1", name: "Sophie M.", role: "Paris 15e" },
+                { text: "Installation rapide et efficace. Très pro.", image: "https://i.pravatar.cc/100?img=2", name: "Laurent D.", role: "Versailles" },
+                { text: "Service client réactif et installation propre.", image: "https://i.pravatar.cc/100?img=3", name: "Marie C.", role: "Boulogne-Billancourt" },
+              ]}
+            />
+            <TestimonialsColumn
+              duration={22}
+              testimonials={[
+                { text: "Devis clair et travail rapide. Je recommande !", image: "https://i.pravatar.cc/100?img=4", name: "Julie R.", role: "Nanterre" },
+                { text: "Excellente installation, équipe top !", image: "https://i.pravatar.cc/100?img=5", name: "Antoine L.", role: "Saint-Denis" },
+                { text: "Un vrai confort de chauffe depuis la PAC !", image: "https://i.pravatar.cc/100?img=6", name: "Caroline T.", role: "Levallois" },
+              ]}
+            />
+            <TestimonialsColumn
+              duration={24}
+              testimonials={[
+                { text: "Très bonne communication et qualité du service.", image: "https://i.pravatar.cc/100?img=7", name: "Emma D.", role: "Créteil" },
+                { text: "Installation impeccable, je recommande !", image: "https://i.pravatar.cc/100?img=8", name: "Nicolas P.", role: "Fontenay-aux-Roses" },
+                { text: "Service après-vente réactif et aimable.", image: "https://i.pravatar.cc/100?img=9", name: "Claire B.", role: "Clamart" },
+              ]}
+            />
           </div>
         </div>
       </section>
-
-   {/* AVIS GOOGLE */}
-<section id="avis" className="py-16 bg-gray-50 overflow-hidden">
-  <div className="max-w-6xl mx-auto px-4 text-center">
-    <img
-      src="/Google-logo.svg"
-      alt="Avis Google"
-      className="w-20 h-20 object-contain mx-auto mb-4"
-    />
-    <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-6">
-      Ils parlent de nous
-    </h2>
-    <p className="text-lg text-gray-700 mb-10">
-      <span className="font-bold text-blue-600">★★★★★</span> 4.9/5 sur Google
-    </p>
-
-    {/* Carrousel d'avis */}
-    <div className="relative">
-      <div
-        className="flex gap-6 animate-scroll"
-        style={{
-          animation: 'scroll 40s linear infinite',
-        }}
-      >
-        {[
-          {
-            name: 'Sophie M.',
-            location: 'Paris 15e',
-            text: "Travail impeccable et équipe très professionnelle. Ma pompe à chaleur fonctionne à merveille !",
-            rating: 5,
-          },
-          {
-            name: 'Laurent D.',
-            location: 'Versailles',
-            text: "Installation rapide, équipe au top. J’ai fait 35% d’économie dès la première année.",
-            rating: 5,
-          },
-          {
-            name: 'Marie C.',
-            location: 'Boulogne-Billancourt',
-            text: "Service client réactif et techniciens très compétents. Je recommande sans hésiter.",
-            rating: 5,
-          },
-          {
-            name: 'Julie R.',
-            location: 'Nanterre',
-            text: "Devis clair, travaux rapides et résultat parfait. Très satisfaite de MPC Chauffage.",
-            rating: 5,
-          },
-          {
-            name: 'Antoine L.',
-            location: 'Saint-Denis',
-            text: "Excellente expérience. Installation propre et équipe très respectueuse.",
-            rating: 5,
-          },
-          {
-            name: 'Caroline T.',
-            location: 'Levallois',
-            text: "Service après-vente super réactif, je me sens en confiance avec MPC.",
-            rating: 5,
-          },
-          {
-            name: 'Nicolas P.',
-            location: 'Fontenay-aux-Roses',
-            text: "Un vrai gain d’énergie et un confort incroyable depuis l’installation !",
-            rating: 5,
-          },
-          {
-            name: 'Emma D.',
-            location: 'Créteil',
-            text: "Professionnalisme, ponctualité et efficacité. Une entreprise que je recommande vivement.",
-            rating: 5,
-          },
-        ].map((review, index) => (
-          <div
-            key={index}
-            className="min-w-[300px] md:min-w-[360px] bg-white rounded-lg p-6 shadow-md border border-gray-100"
-          >
-            <div className="flex gap-1 mb-3 justify-center">
-              {[...Array(review.rating)].map((_, i) => (
-                <svg
-                  key={i}
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  className="w-5 h-5 text-blue-600"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.12 3.436a1 1 0 00.95.69h3.616c.969 0 1.371 1.24.588 1.81l-2.925 2.13a1 1 0 00-.364 1.118l1.12 3.437c.3.92-.755 1.688-1.54 1.118L10 13.347l-2.936 2.129c-.784.57-1.838-.198-1.539-1.118l1.12-3.437a1 1 0 00-.364-1.118L3.356 8.863c-.783-.57-.38-1.81.588-1.81h3.616a1 1 0 00.95-.69l1.12-3.436z" />
-                </svg>
-              ))}
-            </div>
-            <p className="text-gray-700 mb-3 italic text-sm md:text-base">"{review.text}"</p>
-            <p className="font-semibold text-gray-900">{review.name}</p>
-            <p className="text-sm text-gray-500">{review.location}</p>
-          </div>
-        ))}
-
-        {/* Duplicate for infinite loop */}
-        {[
-          ...Array(8).fill({
-            name: 'Avis client',
-            location: 'IDF',
-            text: "Entreprise sérieuse et efficace. Très bonne expérience avec MPC.",
-            rating: 5,
-          }),
-        ].map((review, index) => (
-          <div
-            key={`duplicate-${index}`}
-            className="min-w-[300px] md:min-w-[360px] bg-white rounded-lg p-6 shadow-md border border-gray-100 opacity-80"
-          >
-            <div className="flex gap-1 mb-3 justify-center">
-              {[...Array(review.rating)].map((_, i) => (
-                <svg
-                  key={i}
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  className="w-5 h-5 text-blue-600"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.12 3.436a1 1 0 00.95.69h3.616c.969 0 1.371 1.24.588 1.81l-2.925 2.13a1 1 0 00-.364 1.118l1.12 3.437c.3.92-.755 1.688-1.54 1.118L10 13.347l-2.936 2.129c-.784.57-1.838-.198-1.539-1.118l1.12-3.437a1 1 0 00-.364-1.118L3.356 8.863c-.783-.57-.38-1.81.588-1.81h3.616a1 1 0 00.95-.69l1.12-3.436z" />
-                </svg>
-              ))}
-            </div>
-            <p className="text-gray-700 mb-3 italic text-sm md:text-base">"{review.text}"</p>
-            <p className="font-semibold text-gray-900">{review.name}</p>
-            <p className="text-sm text-gray-500">{review.location}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-
-  {/* Animation CSS */}
-  <style>{`
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .animate-scroll:hover {
-      animation-play-state: paused;
-    }
-  `}</style>
-</section>
-
-
-      {/* CTA FINAL */}
-      <section className="py-16 bg-gray-900 text-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Prêt à réduire votre facture énergétique ?
-          </h2>
-          <p className="text-xl text-gray-300 mb-8">
-            Contactez-nous dès maintenant pour un devis gratuit et personnalisé
-          </p>
-          <button
-            onClick={() => onNavigate('contact')}
-            className="bg-blue-600 text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-blue-700 transition-colors"
-          >
-            Demander un devis gratuit
-          </button>
-        </div>
-      </section>
-
     </div>
   );
 }
