@@ -34,7 +34,7 @@ export default function HomePage({ onNavigate, scrollToSection }: HomePageProps)
         />
         <div className="absolute inset-0 flex flex-col justify-center items-start text-left text-white px-6 md:px-20">
           <h1 className="text-3xl md:text-5xl mb-4 font-medium max-w-2xl leading-tight">
-            Réduisez vos factures jusqu'à 40% <br /> avec MPC Chauffage
+          Une solution adapté à vos besoins   <br /> pour un confort tout au long de  l'année.
           </h1>
           <p className="text-lg md:text-xl text-blue-50 max-w-lg mb-8">
             Experts en pompes à chaleur, nous vous accompagnons dans tous vos projets de chauffage et climatisation.
