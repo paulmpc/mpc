@@ -42,11 +42,12 @@ function App() {
           description={service.description}
           benefits={service.benefits}
           content={service.content}
+          image={service.image} // ✅ AJOUT DE L’IMAGE ICI
           onNavigate={handleNavigate}
         />
       );
     }
-
+    
     return <HomePage onNavigate={handleNavigate} />;
   };
 

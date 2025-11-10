@@ -17,14 +17,14 @@ export default function Footer({ onNavigate }: FooterProps) {
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-gray-300">
                 <Phone size={18} />
-                <a href="tel:+33123456789" className="hover:text-blue-400">
-                  01 23 45 67 89
+                <a href="tel:+33685717013" className="hover:text-blue-400">
+                  06 85 71 70 13
                 </a>
               </div>
               <div className="flex items-center gap-2 text-gray-300">
                 <Mail size={18} />
-                <a href="mailto:contact@mpc-chauffage.fr" className="hover:text-blue-400">
-                  contact@mpc-chauffage.fr
+                <a href="mailto:paul-adc@mpc75.fr" className="hover:text-blue-400">
+                  paul-adc@mpc75.fr
                 </a>
               </div>
               <div className="flex items-center gap-2 text-gray-300">
@@ -83,8 +83,6 @@ export default function Footer({ onNavigate }: FooterProps) {
           <div>
             <h4 className="text-lg font-semibold mb-4">Informations</h4>
             <ul className="space-y-2 text-gray-300">
-              <li>Certifié RGE</li>
-              <li>Intervention 7j/7</li>
               <li>Devis gratuit</li>
               <li>Garantie décennale</li>
               <li>Zone: Île-de-France</li>
