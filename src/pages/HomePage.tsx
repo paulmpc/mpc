@@ -178,14 +178,15 @@ export default function HomePage({ onNavigate, scrollToSection }: HomePageProps)
       {Object.values(servicesData).map((service) => (
         <div
           key={service.id}
-          className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col"
+          className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 flex flex-col
+                     md:hover:shadow-2xl" // 👉 hover uniquement à partir de md (desktop)
         >
           {/* Image */}
           <div className="overflow-hidden h-64">
             <img
               src={service.image}
               alt={service.title}
-              className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+              className="w-full h-full object-cover transition-transform duration-700 md:hover:scale-105"
             />
           </div>
 
@@ -204,14 +205,16 @@ export default function HomePage({ onNavigate, scrollToSection }: HomePageProps)
             <div className="flex flex-wrap gap-3 mt-auto">
               <button
                 onClick={() => onNavigate("contact")}
-                className="flex-1 bg-blue-700 text-white border-2 border-blue-700 py-3 rounded-md font-medium hover:bg-white hover:text-blue-700 transition-all"
+                className="flex-1 bg-blue-700 text-white border-2 border-blue-700 py-3 rounded-md font-medium
+                           hover:bg-white hover:text-blue-700 transition-all"
               >
                 Obtenir un devis
               </button>
 
               <button
                 onClick={() => onNavigate(service.id)}
-                className="flex-1 bg-white text-blue-700 border-2 border-blue-700 py-3 rounded-md font-medium hover:bg-blue-700 hover:text-white transition-all"
+                className="flex-1 bg-white text-blue-700 border-2 border-blue-700 py-3 rounded-md font-medium
+                           hover:bg-blue-700 hover:text-white transition-all"
               >
                 En savoir plus
               </button>
@@ -222,6 +225,7 @@ export default function HomePage({ onNavigate, scrollToSection }: HomePageProps)
     </div>
   </div>
 </section>
+
 
 
       {/* ✅ AVIS GOOGLE */}
