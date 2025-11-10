@@ -167,7 +167,7 @@ export default function ServicePage({
             onClick={handleGoContact}
             className="bg-white text-blue-600 px-8 py-4 rounded-md font-semibold text-lg hover:bg-blue-50 transition-colors"
           >
-            Être rappelé gratuitement
+            Être rappelé rapidement
           </button>
         </div>
       </section>

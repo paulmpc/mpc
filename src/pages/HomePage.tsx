@@ -42,8 +42,8 @@ export default function HomePage({ onNavigate, scrollToSection }: HomePageProps)
           </p>
           <div className="flex flex-wrap gap-4">
             <button
-              onClick={() => onNavigate("air-eau")}
-              className="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium text-base sm:text-lg hover:bg-blue-700 hover:text-white border-2 border-white transition-all"
+onClick={() => onNavigate("home", "services")}
+className="bg-white text-blue-700 px-6 sm:px-8 py-3 sm:py-4 rounded-md font-medium text-base sm:text-lg hover:bg-blue-700 hover:text-white border-2 border-white transition-all"
             >
               Découvrir nos solutions
             </button>
