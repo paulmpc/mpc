@@ -1,13 +1,14 @@
-import { CheckCircle, Phone } from 'lucide-react';
-import ContactForm from '../components/ContactForm';
+import { useEffect } from "react";
+import { CheckCircle, Phone, ArrowLeft } from "lucide-react";
+import ContactForm from "../components/ContactForm";
 
 interface ServicePageProps {
   title: string;
   description: string;
   benefits: string[];
   content: string[];
-  image?: string;
-  onNavigate: (page: string) => void;
+  image?: string; // chemin type: "/air.webp"
+  onNavigate: (page: string, section?: string) => void;
 }
 
 export default function ServicePage({
@@ -18,139 +19,142 @@ export default function ServicePage({
   image,
   onNavigate,
 }: ServicePageProps) {
+  // ✅ Scroll tout en haut à chaque ouverture de la page
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, []);
+
+  // ✅ Retour à la section "Nos services"
+  const handleBack = () => {
+    onNavigate("home", "services");
+  };
+
+  const handleGoContact = () => {
+    onNavigate("contact");
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "auto" }), 0);
+  };
+
   return (
-    <div>
-      {/* ✅ SECTION HERO TYPE "CARD" */}
-      <section className="py-20 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-          {/* IMAGE À GAUCHE */}
-          <div className="rounded-2xl overflow-hidden shadow-lg">
-            {image && (
-              <img
-                src={image}
-                alt={title}
-                className="w-full h-[500px] object-cover hover:scale-105 transition-transform duration-700"
-              />
-            )}
-          </div>
+    <div className="bg-white">
+      {/* HEADER DE PAGE AVEC BOUTON RETOUR */}
+      <div className="max-w-7xl mx-auto px-4 pt-8">
+        <button
+          onClick={handleBack}
+          className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
+        >
+          <ArrowLeft size={18} />
+          Retour aux services
+        </button>
+      </div>
 
-          {/* TEXTE À DROITE */}
-          <div className="text-left">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">{title}</h1>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">{description}</p>
+      {/* CARD PRINCIPALE : image gauche / texte droite */}
+      <section className="py-8">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-8 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+            {/* IMAGE */}
+            <div className="relative min-h-[360px] md:min-h-[520px]">
+              {image && (
+                <img
+                  src={image}
+                  alt={title}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              )}
+            </div>
 
-            <div className="flex flex-wrap gap-4">
-              <button
-                onClick={() => onNavigate('contact')}
-                className="bg-blue-600 text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-blue-700 transition-all"
-              >
-                Demander un devis
-              </button>
-              <a
-                href="tel:+33123456789"
-                className="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-md font-semibold text-lg hover:bg-blue-50 transition-all flex items-center gap-2"
-              >
-                <Phone size={20} />
-                01 23 45 67 89
-              </a>
+            {/* TEXTE */}
+            <div className="p-6 md:p-10 flex flex-col">
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                {title}
+              </h1>
+              <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+                {description}
+              </p>
+
+              {/* CTAs principaux */}
+              <div className="mt-auto flex flex-wrap gap-3">
+                <button
+                  onClick={handleGoContact}
+                  className="bg-blue-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-blue-700 transition-colors"
+                >
+                  Demander un devis
+                </button>
+                <a
+                  href="tel:+33123456789"
+                  className="border-2 border-blue-600 text-blue-600 px-6 py-3 rounded-md font-semibold hover:bg-blue-50 transition-colors inline-flex items-center gap-2"
+                >
+                  <Phone size={20} />
+                  06 85 71 70 13
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ✅ SECTION CONTENU */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-3 gap-12">
-            {/* CONTENU PRINCIPAL */}
-            <div className="lg:col-span-2">
-              <div className="prose max-w-none mb-12">
-                {content.map((paragraph, index) => (
-                  <p key={index} className="text-lg text-gray-700 mb-6 leading-relaxed">
-                    {paragraph}
-                  </p>
-                ))}
+      {/* CONTENU DÉTAILLÉ */}
+      <section className="py-12">
+        <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-3 gap-12">
+          {/* Texte long */}
+          <div className="lg:col-span-2">
+            <div className="prose max-w-none">
+              {content.map((paragraph, i) => (
+                <p key={i} className="text-lg text-gray-700 leading-relaxed mb-6">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </div>
+
+          {/* Formulaire + avantages MPC */}
+          <aside className="lg:col-span-1">
+            <div className="sticky top-24 space-y-8">
+              <ContactForm compact />
+
+              <div className="bg-gray-50 rounded-lg p-6">
+                <h3 className="font-bold text-lg text-gray-900 mb-4">
+                  Pourquoi choisir MPC ?
+                </h3>
+                <ul className="space-y-3 text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="text-blue-600 mt-0.5" size={20} />
+                    <span>Devis gratuit sous 24h</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="text-blue-600 mt-0.5" size={20} />
+                    <span>Garantie décennale</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="text-blue-600 mt-0.5" size={20} />
+                    <span>SAV réactif</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="text-blue-600 mt-0.5" size={20} />
+                    <span>Intervention rapide</span>
+                  </li>
+                </ul>
               </div>
 
-              {/* ✅ AVANTAGES */}
-              <div className="bg-blue-50 rounded-lg p-8 mb-12">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">
+              {/* Avantages de la solution */}
+              <div className="bg-blue-50 rounded-lg p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">
                   Les avantages de cette solution
-                </h2>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <CheckCircle className="text-blue-600 flex-shrink-0 mt-1" size={24} />
-                      <p className="text-gray-700">{benefit}</p>
+                </h3>
+                <div className="space-y-3">
+                  {benefits.map((b, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                      <CheckCircle className="text-blue-600 mt-0.5" size={20} />
+                      <span className="text-gray-700">{b}</span>
                     </div>
                   ))}
                 </div>
               </div>
-
-              {/* ✅ SECTION INSTALLATION */}
-              <div className="bg-gray-900 text-white rounded-lg p-8">
-                <h3 className="text-2xl font-bold mb-4">Installation certifiée RGE</h3>
-                <p className="text-gray-300 mb-6">
-                  Nos techniciens certifiés RGE vous garantissent une installation conforme aux normes
-                  en vigueur. Bénéficiez des aides de l'État pour votre projet.
-                </p>
-                <div className="flex flex-wrap gap-4">
-                  <button
-                    onClick={() => onNavigate('contact')}
-                    className="bg-blue-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-blue-700 transition-colors"
-                  >
-                    Demander un devis
-                  </button>
-                  <a
-                    href="tel:+33123456789"
-                    className="border-2 border-white text-white px-6 py-3 rounded-md font-semibold hover:bg-white hover:text-gray-900 transition-colors flex items-center gap-2"
-                  >
-                    <Phone size={20} />
-                    01 23 45 67 89
-                  </a>
-                </div>
-              </div>
             </div>
-
-            {/* ✅ FORMULAIRE + AVANTAGES */}
-            <div className="lg:col-span-1">
-              <div className="sticky top-24">
-                <ContactForm compact />
-
-                <div className="mt-8 bg-gray-50 rounded-lg p-6">
-                  <h3 className="font-bold text-lg text-gray-900 mb-4">
-                    Pourquoi choisir MPC ?
-                  </h3>
-                  <ul className="space-y-3 text-gray-700">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="text-blue-600 flex-shrink-0 mt-0.5" size={20} />
-                      <span>Devis gratuit sous 24h</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="text-blue-600 flex-shrink-0 mt-0.5" size={20} />
-                      <span>Certifié RGE</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="text-blue-600 flex-shrink-0 mt-0.5" size={20} />
-                      <span>Garantie décennale</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="text-blue-600 flex-shrink-0 mt-0.5" size={20} />
-                      <span>SAV réactif</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="text-blue-600 flex-shrink-0 mt-0.5" size={20} />
-                      <span>Intervention rapide</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
+          </aside>
         </div>
       </section>
 
-      {/* ✅ SECTION DEVIS */}
+      {/* Bandeau devis */}
       <section className="py-16 bg-blue-600 text-white text-center">
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
@@ -160,7 +164,7 @@ export default function ServicePage({
             Nos experts vous répondent sous 24h
           </p>
           <button
-            onClick={() => onNavigate('contact')}
+            onClick={handleGoContact}
             className="bg-white text-blue-600 px-8 py-4 rounded-md font-semibold text-lg hover:bg-blue-50 transition-colors"
           >
             Être rappelé gratuitement

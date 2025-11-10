@@ -1,13 +1,28 @@
+import { useEffect } from "react";
 import { Droplet, Wind, Flame, Wrench, CheckCircle, Hammer, Smile } from "lucide-react";
 import { motion } from "framer-motion";
 import { StatsCard } from "../components/ui/activity-stats-card";
 import { TestimonialsColumn } from "../components/blocks/testimonials-columns-1";
 
 interface HomePageProps {
-  onNavigate: (page: string) => void;
+  onNavigate: (page: string, section?: string) => void;
+  scrollToSection?: string | null;
 }
 
-export default function HomePage({ onNavigate }: HomePageProps) {
+export default function HomePage({ onNavigate, scrollToSection }: HomePageProps) {
+  useEffect(() => {
+    if (scrollToSection === "services") {
+      const sectionEl = document.getElementById("services");
+      if (sectionEl) {
+        const y = sectionEl.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: y, behavior: "auto" });
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
+  }, [scrollToSection]);
+
+
   return (
     <div className="bg-white overflow-hidden">
       {/* HERO */}

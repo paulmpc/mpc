@@ -17,8 +17,6 @@ export const servicesData: Record<string, ServiceData> = {
       "Économies d'énergie jusqu'à 70%",
       'Solution écologique et durable',
       'Confort thermique optimal',
-      "Éligible aux aides de l'État",
-      'Installation certifiée RGE',
       'Garantie décennale',
     ],
     content: [
@@ -56,18 +54,17 @@ export const servicesData: Record<string, ServiceData> = {
     description:
       'Remplacez votre ancienne chaudière par une pompe à chaleur plus performante et écologique.',
     benefits: [
-      'Réduction de 60% de vos factures',
+      'Réduction de 40% de vos factures',
       'Solution hybride disponible',
       "Accompagnement sur les aides",
       'Installation en remplacement direct',
       'Compatible avec vos radiateurs',
-      'Maintenance simplifiée',
     ],
     content: [
       "Vous possédez une chaudière gaz ou fioul vieillissante ? Il est temps de passer à une solution plus performante et respectueuse de l'environnement.",
       "Nous proposons des systèmes hybrides qui combinent pompe à chaleur et chaudière pour optimiser votre confort et vos économies.",
       "MPC réalise une étude gratuite de votre installation et vous accompagne dans les démarches pour obtenir les aides de l'État.",
-      "Nos techniciens certifiés RGE assurent l'installation complète et la mise en service.",
+      "Nos techniciens expérimentés assurent l'installation complète et la mise en service.",
     ],
     image: '/chaudiere.webp', // ✅ (si tu as ce fichier)
   },
@@ -78,11 +75,9 @@ export const servicesData: Record<string, ServiceData> = {
       'MPC intervient pour vos besoins en chauffage collectif (copropriétés, bâtiments publics ou tertiaires).',
     benefits: [
       'Études techniques complètes',
-      'Installation de grande envergure',
       'Mise en conformité réglementaire',
       'Maintenance et dépannage',
       'Optimisation énergétique',
-      'Suivi de performance',
     ],
     content: [
       "MPC Chauffage possède une expertise reconnue dans l'installation et la maintenance de systèmes de chauffage collectif pour les copropriétés, bâtiments publics et établissements tertiaires.",
@@ -103,7 +98,6 @@ export const servicesData: Record<string, ServiceData> = {
       'Réduit les pannes',
       'Sécurise votre installation',
       'Intervention rapide',
-      'Contrat sur mesure',
     ],
     content: [
       "L'entretien régulier de votre système de chauffage est essentiel pour garantir son bon fonctionnement et ses performances énergétiques.",
